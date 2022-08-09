@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <h1>Hola</h1>
-  </div>
+  <div></div>
 </template>
 
 <script setup></script>
 
 <style lang="scss" scoped>
-@import "@/scss/views/home";
+@import "@/scss/components/song";
 </style>
