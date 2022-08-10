@@ -1,5 +1,5 @@
 header { 
     line-height: 1.5;
     max-height: 100vh;
-    background-color: $primary-color;
+    background-color: map-get($color, 'primary');
 }

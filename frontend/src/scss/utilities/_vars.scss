@@ -1,1 +1,24 @@
-$primary-color: red;
+$color: (
+    'primary': #727E7D,
+    'primary-dark': #373D3D, 
+    'secondary': #DAD9CA,
+    'background': rgba(39, 39, 39, 0.94),
+    'contrast': #C9A18D,
+    'text-light': #DAD9CA,
+    'text-dark':  #000,
+    'icon-dark': #000,
+    'icon-light': #DAD9CA,
+    'shadow-light': #fff,
+    'border-light': #9E9E9E,
+);
+
+$primary-font-family: 
+    Ubuntu, Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+$font-size:  (
+    'lg': 3rem,
+    'md': 2.4rem,
+    'sm': 2.1rem,
+)
+
