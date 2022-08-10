@@ -1,5 +1,5 @@
-@import 'utilities/vars';
-
-h1 {
-    font-size: 211px;
-}
+@import 'base/reset';
+@import 'base/typo';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/grid';
