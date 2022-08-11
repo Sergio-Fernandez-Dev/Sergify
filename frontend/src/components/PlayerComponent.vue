@@ -5,5 +5,5 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-@import "../scss/components/player";
+@import "@/assets/scss/components/player";
 </style>
