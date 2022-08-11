@@ -1,6 +1,20 @@
-@mixin font($family, $size, $style, $weight) {
+@mixin font($family, $size, $style: normal, $weight: 400) {
     font-family: $family;
     font-size: $size;
     font-style: $style;
-    font-weight: $weight;
+    font-weight: $weight; 
+}
+
+@mixin screen($width) {
+    @media screen and (min-width: $width){
+        @content
+    }
+}
+
+@mixin flex($direction, $wrap: wrap, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap; 
+    justify-content: $justify;
+    align-items: $align;
 }

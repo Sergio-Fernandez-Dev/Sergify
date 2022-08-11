@@ -8,6 +8,7 @@ import { RouterView } from "vue-router";
   </header>
   <RouterView />
   <footer>
+    <span></span>
     <p>&copy; Sergio Fernández Fernández</p>
   </footer>
 </template>

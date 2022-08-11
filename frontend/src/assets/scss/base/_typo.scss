@@ -6,50 +6,57 @@
 }
 
 @font-face {
-    font-family: "Ubuntu";
+    font-family: $primary-font-family;
     src: url(@/assets/fonts/Ubuntu-Regular.ttf);
     font-style: normal;
     font-weight: 400;
 }
 
 @font-face {
-    font-family: "Ubuntu";
+    font-family: $primary-font-family;
     src: url(@/assets/fonts/Ubuntu-Italic.ttf);
     font-style: italic;
     font-weight: 400;
 }
 
 @font-face {
-    font-family: "Ubuntu";
+    font-family: $primary-font-family;
     src: url(@/assets/fonts/Ubuntu-LightItalic.ttf);
     font-style: italic;
     font-weight: 300;
 }
 
 .title-big {
-    @include font("Ubuntu",map-get($font-size,'lg'), normal, 400);
+    @include font($primary-font-family,map-get($font-size,'mv-lg'));
+    @include screen($screen-md){font-size: map-get($font-size, 'lg')}
 }
 
 .subtitle-big {
-    @include font("Ubuntu",map-get($font-size,'md'), italic, 300);
+    @include font($primary-font-family,map-get($font-size,'mv-md'), italic, 300);
+    @include screen($screen-md){font-size: map-get($font-size, 'md')}
 }
 
 .title-small {
-    @include font("Ubuntu",map-get($font-size,'md'), normal, 400);
+    @include font($primary-font-family,map-get($font-size,'mv-sm'));
+    @include screen($screen-md){font-size: map-get($font-size, 'md')}
 }
 
 .subtitle-small {
-    @include font("Ubuntu",map-get($font-size,'sm'), italic, 300);
+    @include font($primary-font-family,map-get($font-size,'mv-xs'), italic, 300);
+    @include screen($screen-md){font-size: map-get($font-size, 'sm')}
 }
 
 .search-text {
-        @include font("Ubuntu",map-get($font-size,'md'), italic, 400);
+        @include font($primary-font-family,map-get($font-size,'mv-sm'), italic);
+        @include screen($screen-md){font-size: map-get($font-size, 'md')}
 }
 
 .timestamp {
-    @include font("Inter",map-get($font-size,'sm'), normal, 400);
+    @include font("Inter",map-get($font-size,'mv-xs'));
+    @include screen($screen-md){font-size: map-get($font-size, 'sm')}
 }
 
 .playlist-text {
-    @include font("Inter",map-get($font-size,'md'), normal, 400);
+    @include font("Inter",map-get($font-size,'mv-xs')) ;
+    @include screen($screen-md){font-size: map-get($font-size, 'md')}
 }

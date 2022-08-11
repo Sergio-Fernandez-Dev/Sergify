@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <main>
     <h1 class="title-big">Hola</h1>
-  </div>
+  </main>
 </template>
 
 <script setup></script>

@@ -1,3 +1,4 @@
+//Colors
 $color: (
     'primary': #727E7D,
     'primary-dark': #373D3D, 
@@ -12,13 +13,19 @@ $color: (
     'border-light': #9E9E9E,
 );
 
-$primary-font-family: 
-    Ubuntu, Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-
+// Fonts
+$primary-font-family: 'Ubuntu';
 $font-size:  (
     'lg': 3rem,
     'md': 2.4rem,
     'sm': 2.1rem,
-)
+    'mv-lg': 2.6rem,
+    'mv-md': 2.3rem,
+    'mv-sm': 1.7rem,
+    'mv-xs': 1.5rem
+);
 
+// Breakpoints
+$screen-xs: 48rem;
+$screen-md: 96rem;
+$screen-lg:  102.4rem;
