@@ -32,7 +32,12 @@ body {
             max-width:  120rem;
             background-color: map-get($color, 'background');
             min-height: 100vh;
-            padding: 7.5rem;
+            padding: 5rem 2rem;
+
+            @include flex(row);
+            @include screen($screen-md){
+                padding: 8rem 4rem;
+            }
         }
     }
 }
