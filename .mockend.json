@@ -1,0 +1,24 @@
+{
+    "Artist": {
+        "name":{"string":{}},
+        "album": {
+            "hasMany": "Album"
+        }
+    },
+    "Album": {
+        "title": {"string": {}},
+        "artist": {
+            "belongsTo": "Artist"
+        },
+        "song": {
+            "hasMany": "Song"
+        }
+    },
+    "Song":{ 
+        "title": {"string": {}},
+        "url": {"string": {}} ,
+        "album": {
+            "belongsTo": "Album"
+        }
+    }   
+}
