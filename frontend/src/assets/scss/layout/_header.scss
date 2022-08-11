@@ -1,9 +1,22 @@
 header { 
+    position: relative;
     width: 100vw;
     height: 5.5rem;
     background-color: map-get($color, 'primary');
+    padding: 1.2rem;
+    @include flex(row, $align: baseline);
 
     img {
-        width: 30%;
+        position: absolute;
+        width: 19.5rem;
+        z-index: 2; 
+    }
+
+    @include screen($screen-md) {
+        height: 11rem;
+        padding: 1.7rem;
+            img {
+                width: 42.5rem;
+            }
     }
 }

@@ -25,14 +25,14 @@ body {
         background-position: center;
         background-size: cover; 
 
-         @include flex(column);
+        @include flex(column);
 
         main { 
             width: 100%;
             max-width:  120rem;
             background-color: map-get($color, 'background');
             min-height: 100vh;
-
+            padding: 7.5rem;
         }
     }
 }
