@@ -5,5 +5,5 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-@import "@/scss/components/record";
+@import "@/scss/components/track";
 </style>
