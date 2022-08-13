@@ -1,11 +1,10 @@
 <template>
   <div class="album-container">
-    <div class="album-cover">
-      <img :src="cover" />
-    </div>
+    <img class="cover" :src="cover" />
+    <div class="animation"></div>
     <div class="album-info">
-      <h3>{{ title }}</h3>
-      <h4>{{ artist }}</h4>
+      <h3 class="title-small">{{ title }}</h3>
+      <h4 class="subtitle-small">{{ artist }}</h4>
     </div>
   </div>
 </template>

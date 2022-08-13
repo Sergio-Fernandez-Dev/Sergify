@@ -1,0 +1,17 @@
+.album-container {
+        width: 100%;
+        height: auto;
+    
+    @include flex(column);  
+    .cover{
+        width: 100%;
+        height: auto;
+    }
+
+    .album-info {
+        width: 100%;
+        text-align: left;
+        padding:  1rem 0.5rem;
+    }
+    
+}
