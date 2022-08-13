@@ -3,15 +3,38 @@
         height: auto;
     
     @include flex(column);  
-    .cover{
-        width: 100%;
-        height: auto;
+
+    .animation {
+        position: relative; 
+        .cover{
+            width: 100%;
+            height: auto;
+        }
+        .icon {
+            fill: white;
+            background-color: map-get($map: $color, $key: 'icon-dark');
+            z-index: 3;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            opacity:  0%;
+        }
+        &:hover {
+            .icon {
+                opacity: 35%;
+            }
+        } 
+        &:active {
+            .icon {
+                opacity: 50%;
+            }
+        }
     }
 
     .album-info {
         width: 100%;
         text-align: left;
-        padding:  1rem 0.5rem;
+        padding:  0 0.5rem;
     }
     
 }

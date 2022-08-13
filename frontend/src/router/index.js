@@ -8,11 +8,12 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+
     },
     {
-      path: "/player",
-      name: "player",
-      component: () => import("../views/PlayerView.vue"),
+      path: "/player/:albumId",
+      component: () => import("@/views/PlayerView.vue"),
+      props: true,
     },
   ],
 });

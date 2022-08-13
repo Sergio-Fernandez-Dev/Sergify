@@ -14,8 +14,8 @@
 </template>
 
 <script setup>
-import { apiCall } from "../services/apiCall";
-import AlbumComponent from "../components/AlbumComponent.vue";
+import { apiCall } from "@/services/apiCall";
+import AlbumComponent from "@/components/AlbumComponent.vue";
 import { onMounted, ref } from "vue";
 
 const data = ref(null);

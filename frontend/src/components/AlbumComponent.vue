@@ -1,7 +1,11 @@
 <template>
   <div class="album-container">
-    <img class="cover" :src="cover" />
-    <div class="animation"></div>
+    <RouterLink :to="{ name: 'player', params: { albumId: id } }">
+      <div class="animation">
+        <img class="cover" :src="cover" />
+        <PlayAlbumIcon class="icon" />
+      </div>
+    </RouterLink>
     <div class="album-info">
       <h3 class="title-small">{{ title }}</h3>
       <h4 class="subtitle-small">{{ artist }}</h4>
@@ -10,6 +14,9 @@
 </template>
 
 <script setup>
+import PlayAlbumIcon from "@/components/icons/PlayAlbumIcon.vue";
+import { RouterLink } from "vue-router";
+
 defineProps({
   id: Number,
   title: String,
