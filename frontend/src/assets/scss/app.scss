@@ -2,7 +2,7 @@
 @import 'base/typo';
 @import 'layout/header';
 @import 'layout/footer';
-@import 'layout/grid';
+@import 'layout/main';
 
 html {
     font-size: 62.5%;
@@ -26,19 +26,6 @@ body {
         background-size: cover; 
 
         @include flex(column);
-
-        .main { 
-            width: 100%;
-            max-width:  120rem;
-            background-color: map-get($color, 'background');
-            min-height: 100vh;
-            padding: 5rem 2rem;
-
-            @include flex(row);
-            @include screen($screen-md){
-                padding: 8rem 4rem;
-            }
-        }
     }
 }
 

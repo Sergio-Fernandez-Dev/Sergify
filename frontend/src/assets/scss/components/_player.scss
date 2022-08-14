@@ -1,5 +1,20 @@
-@import '../utilities/vars';
-h1  {
-    color:$primary-color;
-    font-size: medium;
+.media {
+  &__icon {
+  }
+  &__time-info {
+  }
+  &__timebar {
+  }
+  &__wrapper {
+  }
+}
+.player {
+  width: 100%;
+  background-color: red;
+  &__img {
+  }
+  &__info {
+  }
+  &__wrapper {
+  }
 }

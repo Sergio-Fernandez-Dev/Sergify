@@ -1,10 +1,16 @@
 <template>
-  <div>
-    <h1>Album numero {{ $route.params.albumId }}</h1>
+  <div class="main__flex">
+    <PlayerComponent />
   </div>
 </template>
 
 <script setup>
+import { useRoute } from "vue-router";
+import PlayerComponent from "../components/PlayerComponent.vue";
+
+const albumId = useRoute().params.albumId;
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "@/assets/scss/views/player";
+</style>

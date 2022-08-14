@@ -1,5 +1,5 @@
 <template>
-  <div class="main__grid">
+  <section class="main__grid">
     <AlbumComponent
       v-for="album in store.albumList"
       :key="album.id"
@@ -8,7 +8,7 @@
       :artist="album.artist.name"
       :cover="album.cover"
     />
-  </div>
+  </section>
 </template>
 
 <script setup>
