@@ -1,5 +1,5 @@
 <template>
-  <section class="main__grid">
+  <section class="home-view">
     <AlbumComponent
       v-for="album in store.albumList"
       :key="album.id"

@@ -1,4 +1,6 @@
-.player {
-    font-size: map-get($map: $font-size, $key: 'mv-lg');
-    
+.player-view {
+  @include flex(column, $align: stretch);
+  font-size: map-get($map: $font-size, $key: "mv-lg");
+  width: 100%;
+  min-height: 100%;
 }

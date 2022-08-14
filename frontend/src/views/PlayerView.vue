@@ -1,5 +1,5 @@
 <template>
-  <div class="main__flex">
+  <div class="player-view">
     <PlayerComponent />
   </div>
 </template>
