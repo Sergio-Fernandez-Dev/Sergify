@@ -1,12 +1,13 @@
 <template>
-  <div class="album-container">
-    <RouterLink :to="{ name: 'player', params: { albumId: id } }">
-      <div class="animation">
-        <img class="cover" :src="cover" />
-        <PlayAlbumIcon class="icon" />
-      </div>
+  <div class="album">
+    <RouterLink
+      class="album__link"
+      :to="{ name: 'player', params: { albumId: id } }"
+    >
+      <img class="album__img" :src="cover" />
+      <PlayAlbumIcon class="album__icon" />
     </RouterLink>
-    <div class="album-info">
+    <div class="album__wrapper">
       <h3 class="title-small">{{ title }}</h3>
       <h4 class="subtitle-small">{{ artist }}</h4>
     </div>

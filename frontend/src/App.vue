@@ -3,13 +3,15 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <header>
-    <img alt="Sergify logo" class="header__img" src="@/assets/logo.svg" />
+  <header class="header">
+    <img class="header__img" alt="Sergify logo" src="@/assets/logo.svg" />
   </header>
-  <RouterView />
-  <footer>
-    <span></span>
-    <p>&copy; Sergio Fernández Fernández</p>
+  <main class="main">
+    <RouterView />
+  </main>
+  <footer class="footer">
+    <span class="footer__span"></span>
+    <p class="footer__p">&copy; Sergio Fernández Fernández</p>
   </footer>
 </template>
 

@@ -27,7 +27,7 @@ body {
 
         @include flex(column);
 
-        main { 
+        .main { 
             width: 100%;
             max-width:  120rem;
             background-color: map-get($color, 'background');

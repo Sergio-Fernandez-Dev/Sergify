@@ -8,10 +8,10 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
-
     },
     {
       path: "/player/:albumId",
+      name: "player",
       component: () => import("@/views/PlayerView.vue"),
       props: true,
     },
