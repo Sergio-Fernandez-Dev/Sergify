@@ -1,7 +1,7 @@
 <template>
-  <div class="player-view">
+  <main class="main main--player-view">
     <PlayerComponent />
-  </div>
+  </main>
 </template>
 
 <script setup>
@@ -9,6 +9,7 @@ import { useRoute } from "vue-router";
 import PlayerComponent from "../components/PlayerComponent.vue";
 
 const albumId = useRoute().params.albumId;
+
 </script>
 
 <style lang="scss" scoped>

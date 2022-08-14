@@ -1,33 +1,27 @@
 <template>
-  <section class="home-view">
+  <main class="main main--home-view">
     <AlbumComponent
-      v-for="album in store.albumList"
+      v-for="album in data"
       :key="album.id"
       :id="album.id"
       :title="album.title"
       :artist="album.artist.name"
       :cover="album.cover"
     />
-  </section>
+  </main>
 </template>
 
 <script setup>
 import { apiCall } from "@/services/apiCall";
 import AlbumComponent from "@/components/AlbumComponent.vue";
 import { onMounted, ref } from "vue";
-import { store } from "@/main";
+
 const data = ref(null);
 
-if (store.albumList.length == 0) {
-  console.log(store.albumList.length);
-  onMounted(async () => {
-    data.value = await apiCall("http://localhost:3000/albums?_expand=artist");
-    data.value.forEach((album) => {
-      store.addAlbumToList(album);
-    });
-    console.log(store.albumList);
-  });
-}
+onMounted(async () => {
+  data.value = await apiCall("http://localhost:3000/albums?_expand=artist");
+});
+
 </script>
 
 <style lang="scss" scoped>

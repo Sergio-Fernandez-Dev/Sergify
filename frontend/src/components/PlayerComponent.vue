@@ -3,8 +3,8 @@
     <div class="player__wrapper">
       <img src="" alt="artist" class="player__img" />
       <div class="player__info">
-        <h3 class="title-big">The Creepshow</h3>
-        <h4 class="subtitle-big">sd dfdkkllú</h4>
+        <h3 class="title-big">{{ title }}</h3>
+        <h4 class="subtitle-big">{{ artist }}</h4>
       </div>
     </div>
     <div class="media">
