@@ -5,5 +5,5 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-@import "@/scss/components/track";
+@import "@/assets/scss/components/track";
 </style>

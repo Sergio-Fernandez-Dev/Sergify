@@ -12,14 +12,15 @@
 </template>
 
 <script setup>
-import { apiCall } from "@/services/apiCall";
+import { getAlbumColletion} from "@/services/apiCall";
 import AlbumComponent from "@/components/AlbumComponent.vue";
 import { onMounted, ref } from "vue";
 
 const data = ref(null);
 
 onMounted(async () => {
-  data.value = await apiCall("http://localhost:3000/albums?_expand=artist");
+  data.value = await getAlbumColletion();
+  console.log(data.value[0]);
 });
 
 </script>
