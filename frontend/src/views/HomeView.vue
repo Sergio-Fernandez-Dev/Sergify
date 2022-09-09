@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { getAlbumColletion} from "@/services/apiCall";
+import { getAlbumColletion } from "@/services/apiCall";
 import AlbumComponent from "@/components/AlbumComponent.vue";
 import { onMounted, ref } from "vue";
 
@@ -22,7 +22,6 @@ onMounted(async () => {
   data.value = await getAlbumColletion();
   console.log(data.value[0]);
 });
-
 </script>
 
 <style lang="scss" scoped>

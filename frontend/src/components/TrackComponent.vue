@@ -1,8 +1,15 @@
 <template>
-  <div></div>
+  <div class="track-wrapper">
+    <p>
+      <span>{{ order }}. </span>
+      <span>{{ title }}. </span>
+    </p>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({ order: Number, title: String });
+</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/components/track";

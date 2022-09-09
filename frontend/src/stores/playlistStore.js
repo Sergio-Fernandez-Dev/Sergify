@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 export const usePlaylistStore = defineStore("playist", () => {
   const playlist = ref({});
+  const currentTrack = ref({});
 
   function addAlbumToPlaylist(album) {
     const tracklist = [];
@@ -13,14 +14,19 @@ export const usePlaylistStore = defineStore("playist", () => {
         url: track.url,
       });
     });
-    console.log(tracklist);
     this.playlist = {
       artist: album.artist.name,
       cover: album.cover,
       tracks: tracklist,
     };
-    console.log(this.playlist);
+
+    this.loadTrack(tracklist[0]);
+
   }
 
-  return { playlist, addAlbumToPlaylist };
+  function loadTrack(track) {
+    this.currentTrack = track;
+  }
+
+  return { playlist, currentTrack, addAlbumToPlaylist, loadTrack };
 });

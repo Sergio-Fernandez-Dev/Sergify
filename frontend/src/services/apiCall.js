@@ -7,6 +7,7 @@ async function getAlbumColletion() {
     params: { _expand: "artist" },
   };
   const result = await apiCall(options);
+  
   return result;
 }
 
@@ -17,13 +18,13 @@ async function getAllTracks(albumId) {
     params: { _expand: "artist", _embed: "tracks" },
   };
   const result = await apiCall(options);
+
   return result;
 }
 
 async function apiCall(options) {
   try {
     const response = await axios.request(options);
-    console.log(response.data);
 
     return response.data;
   } catch (error) {
