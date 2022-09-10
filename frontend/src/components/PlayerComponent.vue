@@ -16,7 +16,8 @@
       </div>
       <div class="media__wrapper">
         <p class="media__time-info">
-          <span id="current-time"></span> {{audio.currentTime}} / <span id="track-duration"> {{ audio.duration }}</span>
+          <span id="current-time"></span> {{ currentTime }} /
+          <span id="track-duration"> {{ duration }}</span>
         </p>
         <div class="media__timebar">
           <div class="media__timebar--progress"></div>
@@ -51,18 +52,33 @@ import PlayTrackIcon from "./icons/PlayTrackIcon.vue";
 
 const albumId = useRoute().params.albumId;
 const store = usePlaylistStore();
-const audio = new Audio();
 
+let audio = null;
+let duration = null;
+let currentTime = null;
+let backgroundImg = null;
 onMounted(async () => {
-  const data = await getAllTracks(albumId);
-  store.addAlbumToPlaylist(data);
+  const album = await getAllTracks(albumId);
+  backgroundImg = "`url(${album.cover})`";
+  audio = new Audio();
+  store.addAlbumToPlaylist(album);
   audio.src = store.currentTrack.url;
-  audio.load();
+
+  audio.ontimeupdate = () => {
+    updateProgress();
+  };
+
+  audio.onloadedmetadata = () => {
+    updateProgress();
+  };
+
+  audio.onended = () => {
+    nextSong();
+  };
 });
 
 function startSong() {
   audio.play();
-  console.log(audio.src);
 }
 
 function pauseSong() {
@@ -79,7 +95,6 @@ function nextSong() {
 
   store.loadTrack(playlist.tracks[nextSong]);
   audio.src = store.currentTrack.url;
-  audio.load();
   startSong();
 }
 
@@ -92,19 +107,67 @@ function previousSong() {
   }
 
   store.loadTrack(playlist.tracks[previousSong]);
+  audio.src = store.currentTrack.url;
   startSong();
 }
 
-function updateProgress(event) {
-  const { duration, currentTime } = event.srcElement;
+function updateProgress() {
   const trackDuration = document.getElementById("track-duration");
   const time = document.getElementById("current-time");
 
+  let durationInMinutes = Math.floor(audio.duration / 60);
+  let durationInSeconds = Math.floor(audio.duration - durationInMinutes * 60);
+  let currentTimeInMinutes = Math.floor(audio.currentTime / 60);
+  let currentTimeInSeconds = Math.floor(
+    audio.currentTime - currentTimeInMinutes * 60
+  );
+  if (durationInMinutes < 10) {
+    durationInMinutes = "0" + durationInMinutes;
+  }
+  if (durationInSeconds < 10) {
+    durationInSeconds = "0" + durationInSeconds;
+  }
+  if (currentTimeInMinutes < 10) {
+    currentTimeInMinutes = "0" + currentTimeInMinutes;
+  }
+  if (currentTimeInSeconds < 10) {
+    currentTimeInSeconds = "0" + currentTimeInSeconds;
+  }
+  duration = durationInMinutes + ":" + durationInSeconds;
+  currentTime = currentTimeInMinutes + ":" + currentTimeInSeconds;
   trackDuration.innerText = duration;
   time.innerText = currentTime;
 }
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/player";
+.media {
+  &__icon {
+    width: 5rem;
+    fill: map-get($color, "icon-light");
+  }
+  &__icons {
+    width: 100vw;
+  }
+  &__time-info {
+  }
+  &__timebar {
+    &--progress {
+    }
+  }
+}
+.player {
+  width: 100vw;
+  height: 100vh;
+  background-color: map-get($map: $color, $key: "background-dark");
+  &__img {
+  }
+  &__info {
+  }
+  &__wrapper {
+    width: 100vh;
+    opacity: 30%;
+    background-image: v-bind("backgroundImg");
+  }
+}
 </style>

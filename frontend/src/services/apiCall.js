@@ -7,7 +7,7 @@ async function getAlbumColletion() {
     params: { _expand: "artist" },
   };
   const result = await apiCall(options);
-  
+
   return result;
 }
 
@@ -15,7 +15,10 @@ async function getAllTracks(albumId) {
   const options = {
     method: "GET",
     url: `http://localhost:3000/albums/${albumId}`,
-    params: { _expand: "artist", _embed: "tracks" },
+    params: {
+      _expand: "artist",
+      _embed: "tracks",
+    },
   };
   const result = await apiCall(options);
 
