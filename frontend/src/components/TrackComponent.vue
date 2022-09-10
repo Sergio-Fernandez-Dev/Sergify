@@ -11,6 +11,4 @@
 defineProps({ order: Number, title: String });
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/scss/components/track";
-</style>
+<style lang="scss" scoped></style>

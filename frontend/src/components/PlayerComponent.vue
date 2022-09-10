@@ -1,47 +1,6 @@
-<template>
-  <section class="player">
-    <div class="player__wrapper">
-      <img :src="store.playlist.cover" alt="artist" class="player__img" />
-      <div class="player__info">
-        <h3 class="title-big">{{ store.playlist.artist }}</h3>
-        <h4 class="subtitle-big">{{ store.currentTrack.title }}</h4>
-      </div>
-    </div>
-    <div class="media">
-      <div class="media__icons">
-        <BackwardIcon class="media__icon" @click="previousSong()" />
-        <PlayTrackIcon class="media__icon" @click="startSong()" />
-        <PauseIcon class="media__icon" @click="pauseSong()" />
-        <ForwardIcon class="media__icon" @click="nextSong()" />
-      </div>
-      <div class="media__wrapper">
-        <p class="media__time-info">
-          <span id="current-time"></span> {{ currentTime }} /
-          <span id="track-duration"> {{ duration }}</span>
-        </p>
-        <div class="media__timebar">
-          <div class="media__timebar--progress"></div>
-        </div>
-      </div>
-    </div>
-    <div class="playlist">
-      <ul class="playlist__ul">
-        <li class="playlist__li">
-          <TrackComponent
-            v-for="(track, index) in store.playlist.tracks"
-            :key="index + 1"
-            :order="track.order"
-            :title="track.title"
-          />
-        </li>
-      </ul>
-    </div>
-  </section>
-</template>
-
 <script setup>
 import { getAllTracks } from "../services/apiCall";
-import { onBeforeMount, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { usePlaylistStore } from "../stores/playlistStore";
 import { useRoute } from "vue-router";
 import TrackComponent from "./TrackComponent.vue";
@@ -141,14 +100,59 @@ function updateProgress() {
 }
 </script>
 
+<template>
+  <section class="player">
+    <div class="player__wrapper">
+      <img :src="store.playlist.cover" alt="artist" class="player__img" />
+      <div class="player__info">
+        <h3 class="player__title">{{ store.currentTrack.title }}</h3>
+        <h4 class="player__subtitle">{{ store.playlist.artist }}</h4>
+      </div>
+    </div>
+    <div class="media">
+      <div class="media__icons">
+        <BackwardIcon class="media__icon" @click="previousSong()" />
+        <PlayTrackIcon class="media__icon" @click="startSong()" />
+        <PauseIcon class="media__icon" @click="pauseSong()" />
+        <ForwardIcon class="media__icon" @click="nextSong()" />
+      </div>
+      <div class="media__wrapper">
+        <p class="media__time-info">
+          <span id="current-time"></span> {{ currentTime }} /
+          <span id="track-duration"> {{ duration }}</span>
+        </p>
+        <div class="media__timebar">
+          <div class="media__timebar--progress"></div>
+        </div>
+      </div>
+    </div>
+    <div class="playlist">
+      <ul class="playlist__ul">
+        <li class="playlist__li">
+          <TrackComponent
+            v-for="(track, index) in store.playlist.tracks"
+            :key="index + 1"
+            :order="track.order"
+            :title="track.title"
+          />
+        </li>
+      </ul>
+    </div>
+  </section>
+</template>
+
 <style lang="scss" scoped>
 .media {
   &__icon {
-    width: 5rem;
+    width: 3rem;
     fill: map-get($color, "icon-light");
+    @include screen($screen-md) {
+      width: 5rem;
+    }
   }
   &__icons {
     width: 100vw;
+    @include flex(row, $justify: space-evenly);
   }
   &__time-info {
   }
@@ -161,14 +165,40 @@ function updateProgress() {
   width: 100vw;
   height: 100vh;
   background-color: map-get($map: $color, $key: "background-dark");
+
   &__img {
+    max-width: 90vw;
+    margin-top: 3rem;
+    border-radius: 100%;
+    border: 0.1rem solid #9e9e9e;
+    -moz-box-shadow: 0 0 1rem #ffffff;
+    -webkit-box-shadow: 0 0 1rem #ffffff;
+    box-shadow: 0 0 1.2rem #9e9e9e;
   }
   &__info {
+    margin: 2rem auto;
+    text-shadow: 0 0.4rem 0.2rem map-get($map: $color, $key: "shadow-dark");
+    text-align: center;
+  }
+  &__title {
+    @include font(
+      $family: $primary-font-family,
+      $size: map-get($map: $font-size, $key: "mv-lg"),
+    );
+  }
+  &__subtitle {
+    @include font(
+      $family: $primary-font-family,
+      $size: map-get($map: $font-size, $key: "mv-md"),
+      $style: italic,
+      $weight: 300
+    );
   }
   &__wrapper {
     position: relative;
-    width: 100vh;
+    width: 100vw;
     z-index: 1;
+    @include flex(column, $justify: space-evenly);
 
     &::before {
       content: "";
@@ -177,10 +207,14 @@ function updateProgress() {
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.4;
+      opacity: 0.6;
       z-index: -1;
       background-image: v-bind(backgroundImg);
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(0.75rem);
+      -webkit-filter: blur(0.75rem);
     }
   }
 }

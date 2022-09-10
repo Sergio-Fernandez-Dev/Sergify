@@ -27,5 +27,43 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/album";
+.album {
+  width: 100%;
+  height: auto;
+  @include flex(column);
+
+  &__link {
+    position: relative;
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+  }
+
+  &__icon {
+    fill: white;
+    background-color: map-get($map: $color, $key: "icon-dark");
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    opacity: 0%;
+
+    &:hover {
+      opacity: 30%;
+    }
+
+    &:active {
+      opacity: 50%;
+    }
+  }
+
+  &__wrapper {
+    width: 100%;
+    text-align: left;
+    padding: 0 0.5rem;
+  }
+}
+
 </style>

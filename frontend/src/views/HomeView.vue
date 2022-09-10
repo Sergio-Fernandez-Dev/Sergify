@@ -25,5 +25,16 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/views/home";
+@import "@/assets/scss/layout/main";
+
+.main--home-view {
+  display: grid;
+  gap: 2rem;
+  grid-template-rows: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+
+  @include screen($screen-md) {
+    grid-template-columns: repeat(auto-fill, 25.5rem);
+  }
+}
 </style>

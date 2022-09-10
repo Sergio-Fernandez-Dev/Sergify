@@ -9,5 +9,10 @@ import PlayerComponent from "../components/PlayerComponent.vue";
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/views/player";
+@import "@/assets/scss/layout/main";
+
+.main--player-view {
+  @include flex(column);
+  padding: 0;
+}
 </style>
