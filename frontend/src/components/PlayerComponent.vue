@@ -143,6 +143,10 @@ function updateProgress() {
 
 <style lang="scss" scoped>
 .media {
+  width: 100vw;
+  height: 12rem;
+  background-color: map-get($map: $color, $key: "primary-dark");
+  @include flex(column, $justify: space-evenly);
   &__icon {
     width: 3rem;
     fill: map-get($color, "icon-light");
@@ -151,12 +155,21 @@ function updateProgress() {
     }
   }
   &__icons {
-    width: 100vw;
-    @include flex(row, $justify: space-evenly);
+    width: 90vw;
+    @include flex(row, $justify: space-between);
   }
   &__time-info {
+    @include font(
+      $family: $primary-font-family,
+      $size: map-get($map: $font-size, $key: "mv-xs")
+    );
+    padding-bottom: 0.5rem;
   }
   &__timebar {
+    width: 90vw;
+    height: 0.5rem;
+    border: 0.1rem solid map-get($map: $color, $key: 'timebar-border');
+    background-color: map-get($map: $color, $key: 'timebar');
     &--progress {
     }
   }
@@ -183,7 +196,7 @@ function updateProgress() {
   &__title {
     @include font(
       $family: $primary-font-family,
-      $size: map-get($map: $font-size, $key: "mv-lg"),
+      $size: map-get($map: $font-size, $key: "mv-lg")
     );
   }
   &__subtitle {
