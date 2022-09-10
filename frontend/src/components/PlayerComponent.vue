@@ -41,7 +41,7 @@
 
 <script setup>
 import { getAllTracks } from "../services/apiCall";
-import { onMounted } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import { usePlaylistStore } from "../stores/playlistStore";
 import { useRoute } from "vue-router";
 import TrackComponent from "./TrackComponent.vue";
@@ -56,11 +56,12 @@ const store = usePlaylistStore();
 let audio = null;
 let duration = null;
 let currentTime = null;
-let backgroundImg = null;
+let backgroundImg = ref();
+
 onMounted(async () => {
   const album = await getAllTracks(albumId);
-  backgroundImg = "`url(${album.cover})`";
   audio = new Audio();
+  backgroundImg.value = `url('${album.cover}')`;
   store.addAlbumToPlaylist(album);
   audio.src = store.currentTrack.url;
 
@@ -165,9 +166,22 @@ function updateProgress() {
   &__info {
   }
   &__wrapper {
+    position: relative;
     width: 100vh;
-    opacity: 30%;
-    background-image: v-bind("backgroundImg");
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      z-index: -1;
+      background-image: v-bind(backgroundImg);
+      background-size: cover;
+    }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-export const usePlaylistStore = defineStore("playist", () => {
+export const usePlaylistStore = defineStore("playlist", () => {
   const playlist = ref({});
   const currentTrack = ref({});
 
