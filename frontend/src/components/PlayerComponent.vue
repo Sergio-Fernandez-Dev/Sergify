@@ -8,6 +8,8 @@ import BackwardIcon from "./icons/BackwardIcon.vue";
 import PauseIcon from "./icons/PauseIcon.vue";
 import ForwardIcon from "./icons/ForwardIcon.vue";
 import PlayTrackIcon from "./icons/PlayTrackIcon.vue";
+import MoreOptionsIcon from "./icons/MoreOptionsIcon.vue";
+import HomeIcon from "./icons/HomeIcon.vue";
 
 const albumId = useRoute().params.albumId;
 const store = usePlaylistStore();
@@ -102,12 +104,16 @@ function updateProgress() {
 
 <template>
   <section class="player">
-    <div class="player__wrapper">
-      <img :src="store.playlist.cover" alt="artist" class="player__img" />
-      <div class="player__info">
-        <h3 class="player__title">{{ store.currentTrack.title }}</h3>
-        <h4 class="player__subtitle">{{ store.playlist.artist }}</h4>
+    <div class="display">
+      <img class="display__img" :src="store.playlist.cover" alt="artist" />
+      <div class="display__info">
+        <h3 class="display__title">{{ store.currentTrack.title }}</h3>
+        <h4 class="display__subtitle">{{ store.playlist.artist }}</h4>
       </div>
+      <div class="display__icons">
+          <MoreOptionsIcon class="display__icon" />
+          <HomeIcon class="display__icon" />
+        </div>
     </div>
     <div class="media">
       <div class="media__icons">
@@ -142,76 +148,15 @@ function updateProgress() {
 </template>
 
 <style lang="scss" scoped>
-.media {
-  width: 100vw;
-  height: 12rem;
-  background-color: map-get($map: $color, $key: "primary-dark");
-  @include flex(column, $justify: space-evenly);
-  &__icon {
-    width: 3rem;
-    fill: map-get($color, "icon-light");
-    @include screen($screen-md) {
-      width: 5rem;
-    }
-  }
-  &__icons {
-    width: 90vw;
-    @include flex(row, $justify: space-between);
-  }
-  &__time-info {
-    @include font(
-      $family: $primary-font-family,
-      $size: map-get($map: $font-size, $key: "mv-xs")
-    );
-    padding-bottom: 0.5rem;
-  }
-  &__timebar {
-    width: 90vw;
-    height: 0.5rem;
-    border: 0.1rem solid map-get($map: $color, $key: 'timebar-border');
-    background-color: map-get($map: $color, $key: 'timebar');
-    &--progress {
-    }
-  }
-}
 .player {
   width: 100vw;
   height: 100vh;
   background-color: map-get($map: $color, $key: "background-dark");
-
-  &__img {
-    max-width: 90vw;
-    margin-top: 3rem;
-    border-radius: 100%;
-    border: 0.1rem solid #9e9e9e;
-    -moz-box-shadow: 0 0 1rem #ffffff;
-    -webkit-box-shadow: 0 0 1rem #ffffff;
-    box-shadow: 0 0 1.2rem #9e9e9e;
-  }
-  &__info {
-    margin: 2rem auto;
-    text-shadow: 0 0.4rem 0.2rem map-get($map: $color, $key: "shadow-dark");
-    text-align: center;
-  }
-  &__title {
-    @include font(
-      $family: $primary-font-family,
-      $size: map-get($map: $font-size, $key: "mv-lg")
-    );
-  }
-  &__subtitle {
-    @include font(
-      $family: $primary-font-family,
-      $size: map-get($map: $font-size, $key: "mv-md"),
-      $style: italic,
-      $weight: 300
-    );
-  }
-  &__wrapper {
+  .display {
     position: relative;
     width: 100vw;
     z-index: 1;
-    @include flex(column, $justify: space-evenly);
+    @include flex(column);
 
     &::before {
       content: "";
@@ -228,6 +173,75 @@ function updateProgress() {
       background-repeat: no-repeat;
       filter: blur(0.75rem);
       -webkit-filter: blur(0.75rem);
+    }
+    &__icons {
+      width: 90%;
+      margin-bottom: 2rem;
+      @include flex(row, $justify: space-between);
+    }
+    &__icon {
+      text-shadow: 0 0 0.3rem map-get($map: $color, $key: "shadow-dark");
+    }
+    &__img {
+      max-width: 90vw;
+      margin-top: 4.5rem;
+      border-radius: 100%;
+      border: 0.1rem solid map-get($map: $color, $key: "border-light");
+      -moz-box-shadow: 0 0 1rem map-get($map: $color, $key: "shadow-light");
+      -webkit-box-shadow: 0 0 1rem map-get($map: $color, $key: "shadow-light");
+      box-shadow: 0 0 1.2rem map-get($map: $color, $key: "shadow-light");
+    }
+    &__info {
+      max-width: 90vw;
+      margin-top: 2rem;
+      text-shadow: 0 0 0.3rem map-get($map: $color, $key: "shadow-dark");
+      text-align: center;
+    }
+    &__title {
+      @include font(
+        $family: $primary-font-family,
+        $size: map-get($map: $font-size, $key: "mv-lg")
+      );
+    }
+    &__subtitle {
+      @include font(
+        $family: $primary-font-family,
+        $size: map-get($map: $font-size, $key: "mv-md"),
+        $style: italic,
+        $weight: 300
+      );
+    }
+  }
+  .media {
+    width: 100vw;
+    height: 12rem;
+    background-color: map-get($map: $color, $key: "primary-dark");
+    @include flex(column, $justify: space-evenly);
+    &__icon {
+      width: 3rem;
+      fill: map-get($color, "icon-light");
+      @include screen($screen-md) {
+        width: 5rem;
+      }
+    }
+    &__icons {
+      width: 90vw;
+      @include flex(row, $justify: space-between);
+    }
+    &__time-info {
+      @include font(
+        $family: $primary-font-family,
+        $size: map-get($map: $font-size, $key: "mv-xs")
+      );
+      padding-bottom: 0.5rem;
+    }
+    &__timebar {
+      width: 90vw;
+      height: 0.5rem;
+      border: 0.1rem solid map-get($map: $color, $key: "timebar-border");
+      background-color: map-get($map: $color, $key: "timebar");
+      &--progress {
+      }
     }
   }
 }
