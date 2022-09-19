@@ -139,8 +139,7 @@ function updateProgress() {
         <TrackComponent
           v-for="(track, index) in store.playlist.tracks"
           :key="index + 1"
-          :order="track.order"
-          :title="track.title"
+          :track="track"
         />
       </ul>
     </div>
