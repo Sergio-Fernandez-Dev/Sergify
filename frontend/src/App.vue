@@ -21,6 +21,9 @@ html {
   font-size: 62.5%;
 }
 body {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   min-height: 100vh;
   background-color: white;
   font-size: 16rem;
@@ -32,7 +35,7 @@ body {
 
   #app {
     min-height: 100vh;
-    min-width: 100vw;
+    min-width: 100%;
     background-image: url(@/assets/img/background.png);
     background-repeat: no-repeat;
     background-position: center;

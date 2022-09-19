@@ -1,36 +1,37 @@
 //Colors
 $color: (
-    'primary': #727E7D,
-    'primary-dark': #373D3D, 
-    'secondary': #DAD9CA,
-    'background': rgba(39, 39, 39, 0.94),
-    'background-dark': #000,
-    'contrast': #C9A18D,
-    'text-light': #DAD9CA,
-    'text-dark':  #000,
-    'icon-dark': #000,
-    'icon-light': #DAD9CA,
-    'shadow-dark': #000,
-    'shadow-light': #fff,
-    'border-light': #9E9E9E,
-    'timebar': #DAD9CA,
-    'timebar-border': #000
+  "primary": #727e7d,
+  "primary-dark": #373d3d,
+  "secondary": #dad9ca,
+  "background": rgba(39, 39, 39, 0.94),
+  "background-dark": #000,
+  "contrast": #c9a18d,
+  "text-light": #dad9ca,
+  "text-dark": #000,
+  "icon-dark": #000,
+  "icon-light": #dad9ca,
+  "shadow-dark": #000,
+  "shadow-light": #fff,
+  "border-light": #9e9e9e,
+  "timebar": #dad9ca,
+  "timebar-border": #000,
+  "timebar-progress": #ff0000,
 );
 
 // Fonts
-$primary-font-family: 'Ubuntu';
-$secondary-font-family: 'Inter';
-$font-size:  (
-    'lg': 3rem,
-    'md': 2.4rem,
-    'sm': 2.1rem,
-    'mv-lg': 2.6rem,
-    'mv-md': 2rem,
-    'mv-sm': 1.7rem,
-    'mv-xs': 1.5rem
+$primary-font-family: "Ubuntu";
+$secondary-font-family: "Inter";
+$font-size: (
+  "lg": 3rem,
+  "md": 2.4rem,
+  "sm": 2.1rem,
+  "mv-lg": 2.6rem,
+  "mv-md": 2rem,
+  "mv-sm": 1.7rem,
+  "mv-xs": 1.5rem,
 );
 
 // Breakpoints
 $screen-xs: 480px;
 $screen-md: 960px;
-$screen-lg:  1024px;
+$screen-lg: 1024px;

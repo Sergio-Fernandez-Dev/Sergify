@@ -111,9 +111,11 @@ function updateProgress() {
         <h4 class="display__subtitle">{{ store.playlist.artist }}</h4>
       </div>
       <div class="display__icons">
-          <MoreOptionsIcon class="display__icon" />
+        <MoreOptionsIcon class="display__icon" />
+        <RouterLink to="/">
           <HomeIcon class="display__icon" />
-        </div>
+        </RouterLink>
+      </div>
     </div>
     <div class="media">
       <div class="media__icons">
@@ -123,7 +125,7 @@ function updateProgress() {
         <ForwardIcon class="media__icon" @click="nextSong()" />
       </div>
       <div class="media__wrapper">
-        <p class="media__time-info">
+        <p class="media__time_info">
           <span id="current-time"></span> {{ currentTime }} /
           <span id="track-duration"> {{ duration }}</span>
         </p>
@@ -134,14 +136,12 @@ function updateProgress() {
     </div>
     <div class="playlist">
       <ul class="playlist__ul">
-        <li class="playlist__li">
-          <TrackComponent
-            v-for="(track, index) in store.playlist.tracks"
-            :key="index + 1"
-            :order="track.order"
-            :title="track.title"
-          />
-        </li>
+        <TrackComponent
+          v-for="(track, index) in store.playlist.tracks"
+          :key="index + 1"
+          :order="track.order"
+          :title="track.title"
+        />
       </ul>
     </div>
   </section>
@@ -149,12 +149,12 @@ function updateProgress() {
 
 <style lang="scss" scoped>
 .player {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: map-get($map: $color, $key: "background-dark");
   .display {
     position: relative;
-    width: 100vw;
+    width: 100%;
     z-index: 1;
     @include flex(column);
 
@@ -176,14 +176,14 @@ function updateProgress() {
     }
     &__icons {
       width: 90%;
-      margin-bottom: 2rem;
+      margin-bottom: 1.2rem;
       @include flex(row, $justify: space-between);
     }
     &__icon {
       text-shadow: 0 0 0.3rem map-get($map: $color, $key: "shadow-dark");
     }
     &__img {
-      max-width: 90vw;
+      width: 85%;
       margin-top: 4.5rem;
       border-radius: 100%;
       border: 0.1rem solid map-get($map: $color, $key: "border-light");
@@ -192,7 +192,7 @@ function updateProgress() {
       box-shadow: 0 0 1.2rem map-get($map: $color, $key: "shadow-light");
     }
     &__info {
-      max-width: 90vw;
+      max-width: 90%;
       margin-top: 2rem;
       text-shadow: 0 0 0.3rem map-get($map: $color, $key: "shadow-dark");
       text-align: center;
@@ -213,9 +213,11 @@ function updateProgress() {
     }
   }
   .media {
-    width: 100vw;
+    width: 100%;
     height: 12rem;
+    border-top: 0.1rem solid map-get($map: $color, $key: "border-light");
     background-color: map-get($map: $color, $key: "primary-dark");
+    z-index: 1;
     @include flex(column, $justify: space-evenly);
     &__icon {
       width: 3rem;
@@ -228,7 +230,7 @@ function updateProgress() {
       width: 90vw;
       @include flex(row, $justify: space-between);
     }
-    &__time-info {
+    &__time_info {
       @include font(
         $family: $primary-font-family,
         $size: map-get($map: $font-size, $key: "mv-xs")
@@ -236,12 +238,29 @@ function updateProgress() {
       padding-bottom: 0.5rem;
     }
     &__timebar {
-      width: 90vw;
+      width: 100%;
+      padding: 0;
+      margin: 0;
       height: 0.5rem;
       border: 0.1rem solid map-get($map: $color, $key: "timebar-border");
       background-color: map-get($map: $color, $key: "timebar");
+      @include flex(row, $justify: flex-start);
       &--progress {
+        margin: -0.1rem;
+        width: 30%;
+        height: 0.5rem;
+        background-color: map-get($map: $color, $key: "timebar-progress");
       }
+    }
+    &__wrapper {
+      width: 90%;
+    }
+  }
+  .playlist {
+    background-color: map-get($map: $color, $key: "secondary");
+
+    &__ul {
+      @include flex(column);
     }
   }
 }
