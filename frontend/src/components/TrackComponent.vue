@@ -1,31 +1,18 @@
 <script setup>
-import { onMounted } from "vue";
 import { usePlaylistStore } from "../stores/playlistStore";
 import PlayTrackIcon from "./icons/PlayTrackIcon.vue";
 
-const props = defineProps({ track: Object });
+defineProps({ track: Object });
 const store = usePlaylistStore();
 
-let audio = null;
-
-onMounted(async () => {
-  audio = new Audio();
-  audio.src = props.track.url;
-
-});
-
-function changeSong(track) {
-  store.loadTrack(track);
-  audio.play();
-}
 </script>
 
 <template>
   <li class="track">
-    <PlayTrackIcon class="track__icon" @click="changeSong(track)" />
+    <PlayTrackIcon class="track__icon" @click="store.loadTrack(track)" />
     <p class="track__p">
-      <span>{{ props.track.order }}. </span>
-      <span>{{ props.track.title }}. </span>
+      <span>{{ track.order }}. </span>
+      <span>{{ track.title }}. </span>
     </p>
   </li>
 </template>

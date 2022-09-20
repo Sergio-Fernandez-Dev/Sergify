@@ -5,6 +5,8 @@ export const usePlaylistStore = defineStore("playlist", () => {
   const playlist = ref({});
   const currentTrack = ref({});
 
+  let audio = new Audio();
+
   function addAlbumToPlaylist(album) {
     const tracklist = [];
     album.tracks.forEach((track) => {
@@ -21,12 +23,55 @@ export const usePlaylistStore = defineStore("playlist", () => {
     };
 
     this.loadTrack(tracklist[0]);
-
   }
 
   function loadTrack(track) {
+    this.pauseSong();
     this.currentTrack = track;
+    this.audio.src = track.url;
+    this.startSong();
   }
 
-  return { playlist, currentTrack, addAlbumToPlaylist, loadTrack };
+  function startSong() {
+    this.audio.play();
+  }
+
+  function pauseSong() {
+    this.audio.pause();
+  }
+
+  function nextSong() {
+    const playlist = this.playlist;
+    let nextSong = this.currentTrack.order;
+
+    if (nextSong > playlist.tracks.length - 1) {
+      nextSong = 0;
+    }
+
+    this.loadTrack(playlist.tracks[nextSong]);
+
+  }
+
+  function previousSong() {
+    const playlist = this.playlist;
+    let previousSong = this.currentTrack.order - 2;
+
+    if (previousSong < 0) {
+      previousSong = playlist.tracks.length - 1;
+    }
+
+    this.loadTrack(playlist.tracks[previousSong]);
+  }
+
+  return {
+    audio,
+    playlist,
+    currentTrack,
+    addAlbumToPlaylist,
+    loadTrack,
+    startSong,
+    pauseSong,
+    nextSong,
+    previousSong,
+  };
 });

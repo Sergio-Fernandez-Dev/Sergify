@@ -13,67 +13,33 @@ import HomeIcon from "./icons/HomeIcon.vue";
 
 const albumId = useRoute().params.albumId;
 const store = usePlaylistStore();
+const backgroundImg = ref();
+const timeBarWidth = ref(0);
+const circleLeft = ref(0);
 
 let audio = null;
 let duration = null;
 let currentTime = null;
-let backgroundImg = ref();
 
 onMounted(async () => {
   const album = await getAllTracks(albumId);
-  audio = new Audio();
   backgroundImg.value = `url('${album.cover}')`;
   store.addAlbumToPlaylist(album);
-  audio.src = store.currentTrack.url;
-
+  audio = store.audio;
   audio.ontimeupdate = () => {
-    updateProgress();
+    updateTime();
   };
 
   audio.onloadedmetadata = () => {
-    updateProgress();
+    updateTime();
   };
 
   audio.onended = () => {
-    nextSong();
+    store.nextSong();
   };
 });
 
-function startSong() {
-  audio.play();
-}
-
-function pauseSong() {
-  audio.pause();
-}
-
-function nextSong() {
-  const playlist = store.playlist;
-  let nextSong = store.currentTrack.order;
-
-  if (nextSong > playlist.tracks.length - 1) {
-    nextSong = 0;
-  }
-
-  store.loadTrack(playlist.tracks[nextSong]);
-  audio.src = store.currentTrack.url;
-  startSong();
-}
-
-function previousSong() {
-  const playlist = store.playlist;
-  let previousSong = store.currentTrack.order - 2;
-
-  if (previousSong < 0) {
-    previousSong = playlist.tracks.length - 1;
-  }
-
-  store.loadTrack(playlist.tracks[previousSong]);
-  audio.src = store.currentTrack.url;
-  startSong();
-}
-
-function updateProgress() {
+function updateTime() {
   const trackDuration = document.getElementById("track-duration");
   const time = document.getElementById("current-time");
 
@@ -100,6 +66,27 @@ function updateProgress() {
   trackDuration.innerText = duration;
   time.innerText = currentTime;
 }
+
+function moveTimeBar(e) {
+  updateTimeBar(e.pageX);
+}
+
+function updateTimeBar(currentPosition) {
+  let progress = ref();
+  let maxduration = this.audio.duration;
+  let position = currentPosition - progress.value.offsetLeft;
+  let percentage = (100 * position) / progress.value.offsetWidth;
+  if (percentage > 100) {
+    percentage = 100;
+  }
+  if (percentage < 0) {
+    percentage = 0;
+  }
+  timeBarWidth.value = percentage + "%";
+  circleLeft.value = percentage + "%";
+  audio.currentTime = (maxduration * percentage) / 100;
+  audio.play();
+}
 </script>
 
 <template>
@@ -119,18 +106,21 @@ function updateProgress() {
     </div>
     <div class="media">
       <div class="media__icons">
-        <BackwardIcon class="media__icon" @click="previousSong()" />
-        <PlayTrackIcon class="media__icon" @click="startSong()" />
-        <PauseIcon class="media__icon" @click="pauseSong()" />
-        <ForwardIcon class="media__icon" @click="nextSong()" />
+        <BackwardIcon class="media__icon" @click="store.previousSong()" />
+        <PlayTrackIcon class="media__icon" @click="store.startSong()" />
+        <PauseIcon class="media__icon" @click="store.pauseSong()" />
+        <ForwardIcon class="media__icon" @click="store.nextSong()" />
       </div>
       <div class="media__wrapper">
         <p class="media__time_info">
           <span id="current-time"></span> {{ currentTime }} /
           <span id="track-duration"> {{ duration }}</span>
         </p>
-        <div class="media__timebar">
-          <div class="media__timebar--progress"></div>
+        <div class="media__timebar" @click="moveTimeBar(e)">
+          <div
+            class="media__timebar--progress"
+            :style="{ width: timeBarWidth }"
+          ></div>
         </div>
       </div>
     </div>
