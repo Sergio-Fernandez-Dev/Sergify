@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "Inter";
+    font-family: $secondary-font-family;
     src: url(@/assets/fonts/Inter-Regular.ttf);
     font-style: normal;
     font-weight: 400;
@@ -24,26 +24,6 @@
     src: url(@/assets/fonts/Ubuntu-LightItalic.ttf);
     font-style: italic;
     font-weight: 300;
-}
-
-.title-big {
-    @include font($primary-font-family,map-get($font-size,'mv-lg'));
-    @include screen($screen-md){font-size: map-get($font-size, 'lg')}
-}
-
-.subtitle-big {
-    @include font($primary-font-family,map-get($font-size,'mv-md'), italic, 300);
-    @include screen($screen-md){font-size: map-get($font-size, 'md')}
-}
-
-.title-small {
-    @include font($primary-font-family,map-get($font-size,'mv-sm'));
-    @include screen($screen-md){font-size: map-get($font-size, 'md')}
-}
-
-.subtitle-small {
-    @include font($primary-font-family,map-get($font-size,'mv-xs'), italic, 300);
-    @include screen($screen-md){font-size: map-get($font-size, 'sm')}
 }
 
 .search-text {
