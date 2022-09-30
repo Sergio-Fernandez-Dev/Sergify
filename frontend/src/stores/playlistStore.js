@@ -11,7 +11,7 @@ export const usePlaylistStore = defineStore("playlist", () => {
     const tracklist = [];
     album.tracks.forEach((track) => {
       tracklist.push({
-        order: track.order,
+        position: track.position,
         title: track.title,
         url: track.url,
       });
@@ -42,19 +42,18 @@ export const usePlaylistStore = defineStore("playlist", () => {
 
   function nextSong() {
     const playlist = this.playlist;
-    let nextSong = this.currentTrack.order;
+    let nextSong = this.currentTrack.position;
 
     if (nextSong > playlist.tracks.length - 1) {
       nextSong = 0;
     }
 
     this.loadTrack(playlist.tracks[nextSong]);
-
   }
 
   function previousSong() {
     const playlist = this.playlist;
-    let previousSong = this.currentTrack.order - 2;
+    let previousSong = this.currentTrack.position - 2;
 
     if (previousSong < 0) {
       previousSong = playlist.tracks.length - 1;

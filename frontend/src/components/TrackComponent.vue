@@ -4,14 +4,13 @@ import PlayTrackIcon from "./icons/PlayTrackIcon.vue";
 
 defineProps({ track: Object });
 const store = usePlaylistStore();
-
 </script>
 
 <template>
   <li class="track">
     <PlayTrackIcon class="track__icon" @click="store.loadTrack(track)" />
     <p class="track__p">
-      <span>{{ track.order }}. </span>
+      <span>{{ track.position }}. </span>
       <span>{{ track.title }}. </span>
     </p>
   </li>
