@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import com.sergify.backend.model.Album;
 import com.sergify.backend.payload.request.AlbumRequest;
@@ -27,12 +26,14 @@ public class AlbumService {
     }
 
     public Optional<Album> show(Long id) {
+
         return albumRepository.findById(id);
     }
 
     public Album store(AlbumRequest request) {
         Album album = Album
                 .builder()
+                .id(request.getId())
                 .title(request.getTitle())
                 .cover(request.getCover())
                 .build();
@@ -41,5 +42,21 @@ public class AlbumService {
         return response;
     }
 
-    
+    public Album update(Album album) {
+        if (albumRepository.findById(album.getId()).isEmpty()) {
+            throw new RuntimeException("El álbum solicitado no ha sido encontrado");
+        }
+        Album response = albumRepository.save(album);
+        
+        return response;
+    }
+
+    public Long destroy(Long id) {
+        if (albumRepository.findById(id).isEmpty()) {
+            throw new RuntimeException("El álbum solicitado no ha sido encontrado");
+        }
+
+        albumRepository.deleteById(id);
+        return id;
+    }
 }

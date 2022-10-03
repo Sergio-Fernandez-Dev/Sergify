@@ -5,8 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class AlbumRequest {
+public class ArtistRequest {
     private Long id;
-    private String title;
-    private String cover;
+    private String name;
 }

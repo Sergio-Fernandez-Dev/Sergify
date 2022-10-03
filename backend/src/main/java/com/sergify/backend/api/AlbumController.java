@@ -23,31 +23,36 @@ public class AlbumController {
     }
 
     @GetMapping("")
-    public List<Album> index() {
+    public ResponseEntity<List<Album>> index() {
+        List<Album> response = albumService.index();
 
-        return albumService.index();
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{id}")
-    public Optional<Album> show(@PathVariable Long id) {
+    public ResponseEntity<Optional<Album>> show(@PathVariable Long id) {
+        Optional<Album> response = albumService.show(id);
 
-        return albumService.show(id);
+        return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("")
-    public ResponseEntity<?> store(@RequestBody AlbumRequest request) {
+    public ResponseEntity<Album> store(@RequestBody AlbumRequest request) {
         Album response = albumService.store(request);
 
         return ResponseEntity.ok().body(response);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Album album) {
-        Album request = albumService.update(id, album);
+    @PutMapping("")
+    public ResponseEntity<Album> update(@RequestBody Album album) {
+        Album response = albumService.update(album);
 
-        return ResponseEntity.ok()
-                .body("El álbum '" + request.getTitle() + "' ha sido guardado correctamente");
-
+        return ResponseEntity.ok().body(response);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> destroy(@PathVariable Long id) {
+        Long response = albumService.destroy(id);
+        return ResponseEntity.ok().body(response);
+    }
 }

@@ -1,6 +1,7 @@
 package com.sergify.backend.payload.response;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,12 +15,12 @@ import lombok.*;
 @Setter
 @Builder
 public class AlbumResponse {
-    private final Album album;
-    private final Artist artist;
-    private final Array trackList;
+    private Album album;
+    private Artist artist;
+    private List<Track> trackList;
 
     @Autowired
-    public AlbumResponse(Album album, Artist artist, Array trackList) {
+    public AlbumResponse(final Album album, final Artist artist, final List<Track> trackList) {
         this.album = album;
         this.artist = artist;
         this.trackList = trackList;
