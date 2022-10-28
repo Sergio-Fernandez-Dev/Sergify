@@ -33,10 +33,10 @@ public class AlbumService {
     public Album store(AlbumRequest request) {
         Album album = Album
                 .builder()
-                .id(request.getId())
                 .title(request.getTitle())
                 .cover(request.getCover())
                 .build();
+        
         Album response = albumRepository.save(album);
 
         return response;

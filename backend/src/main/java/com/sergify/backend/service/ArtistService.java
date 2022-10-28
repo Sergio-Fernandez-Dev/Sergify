@@ -53,8 +53,8 @@ public class ArtistService {
         if (artistRepository.findById(id).isEmpty()) {
             throw new RuntimeException("El artista solicitado no ha sido encontrado");
         }
-
         artistRepository.deleteById(id);
+        
         return id;
     }
 }
