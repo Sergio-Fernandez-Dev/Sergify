@@ -2,12 +2,14 @@ package com.sergify.backend.model;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
@@ -21,12 +23,7 @@ public class Artist {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JsonBackReference
-    @JoinTable(
-        name = "album_artist",
-        joinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "album_id", referencedColumnName = "id")
-    )
-    private final List<Album> discography = new ArrayList<>();
+    @ManyToMany(mappedBy = "artists")
+    @JsonIgnore
+    private Set<Album> discography = new HashSet<>();
 }
