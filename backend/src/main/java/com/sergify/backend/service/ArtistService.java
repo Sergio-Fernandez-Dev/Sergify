@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.sergify.backend.model.Artist;
 import com.sergify.backend.payload.request.ArtistRequest;
-import com.sergify.backend.repository.IArtistRepository;
+import com.sergify.backend.repository.ArtistRepository;
 
 @Service
 public class ArtistService {
 
-    private final IArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
     @Autowired
-    public ArtistService(IArtistRepository artistRepository) {
+    public ArtistService(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
     }
 
@@ -54,7 +54,7 @@ public class ArtistService {
             throw new RuntimeException("El artista solicitado no ha sido encontrado");
         }
         artistRepository.deleteById(id);
-        
+
         return id;
     }
 }

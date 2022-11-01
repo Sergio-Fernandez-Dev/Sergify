@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.sergify.backend.model.Album;
 import com.sergify.backend.payload.request.AlbumRequest;
-import com.sergify.backend.repository.IAlbumRepository;
+import com.sergify.backend.repository.AlbumRepository;
 
 @Service
 public class AlbumService {
 
-    private final IAlbumRepository albumRepository;
+    private final AlbumRepository albumRepository;
 
     @Autowired
-    public AlbumService(IAlbumRepository albumRepository) {
+    public AlbumService(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
     }
 
@@ -36,7 +36,7 @@ public class AlbumService {
                 .title(request.getTitle())
                 .cover(request.getCover())
                 .build();
-        
+
         Album response = albumRepository.save(album);
 
         return response;
@@ -47,7 +47,7 @@ public class AlbumService {
             throw new RuntimeException("El álbum solicitado no ha sido encontrado");
         }
         Album response = albumRepository.save(album);
-        
+
         return response;
     }
 

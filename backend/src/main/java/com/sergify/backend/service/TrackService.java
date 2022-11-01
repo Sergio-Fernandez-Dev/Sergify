@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.sergify.backend.model.Track;
 import com.sergify.backend.payload.request.TrackRequest;
-import com.sergify.backend.repository.ITrackRepository;
+import com.sergify.backend.repository.TrackRepository;
 
 @Service
 public class TrackService {
-    private final ITrackRepository trackRepository;
+    private final TrackRepository trackRepository;
 
     @Autowired
-    public TrackService(ITrackRepository trackRepository) {
+    public TrackService(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
 
