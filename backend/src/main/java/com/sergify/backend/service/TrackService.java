@@ -32,7 +32,6 @@ public class TrackService {
     public Track store(TrackRequest request) {
         Track track = Track
                 .builder()
-                .id(request.getId())
                 .title(request.getTitle())
                 .position(request.getPosition())
                 .url(request.getUrl())

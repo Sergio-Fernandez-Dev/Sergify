@@ -2,9 +2,6 @@ package com.sergify.backend.payload.request;
 
 import java.util.List;
 
-import com.sergify.backend.model.Artist;
-import com.sergify.backend.model.Track;
-
 import lombok.*;
 
 @Getter
@@ -15,6 +12,6 @@ import lombok.*;
 public class AlbumRequest {
     private String title;
     private String cover;
-    private List<Track> trackList;
-    private List<Artist> artists;
+    private List<TrackRequest> trackList;
+    private List<ArtistRequest> artists;
 }

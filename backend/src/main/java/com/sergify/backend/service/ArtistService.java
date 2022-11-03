@@ -32,7 +32,6 @@ public class ArtistService {
     public Artist store(ArtistRequest request) {
         Artist artist = Artist
                 .builder()
-                .id(request.getId())
                 .name(request.getName())
                 .build();
         Artist response = artistRepository.save(artist);

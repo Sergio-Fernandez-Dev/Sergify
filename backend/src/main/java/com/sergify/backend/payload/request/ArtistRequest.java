@@ -4,8 +4,9 @@ import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class ArtistRequest {
-    private Long id;
     private String name;
 }

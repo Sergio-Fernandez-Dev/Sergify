@@ -7,9 +7,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
@@ -21,30 +18,16 @@ public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String title;
     private String cover;
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Track> trackList = new HashSet<>();
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "album_artist", joinColumns = @JoinColumn(name = "album_id"), inverseJoinColumns = @JoinColumn(name = "artist_id"))
     private Set<Artist> artists = new HashSet<>();
 
-    public void addArtist(Artist artist) {
-        this.artists.add(artist);
-        artist.getDiscography().add(this);
-    }
-
-    public void removeArtist(Long artistId) {
-        Artist artist = this.artists
-                .stream()
-                .filter(currentArtist -> currentArtist.getId() == artistId)
-                .findFirst()
-                .orElse(null);
-
-        if (artist != null) {
-            this.artists.remove(artist);
-            artist.getDiscography().remove(this);
-        }
+    public void addTrack(Track track) {
+        track.setAlbum(this);
     }
 }

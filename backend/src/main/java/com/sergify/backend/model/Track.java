@@ -4,7 +4,6 @@ import lombok.*;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
@@ -22,8 +21,8 @@ public class Track {
     private Integer position;
     @Column(nullable = false)
     private String url;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "album_id")
+    @JoinColumn(name = "album_id"                   )
     private Album album;
 }
