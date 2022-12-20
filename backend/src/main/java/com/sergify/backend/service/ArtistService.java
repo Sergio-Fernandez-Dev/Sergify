@@ -34,18 +34,16 @@ public class ArtistService {
                 .builder()
                 .name(request.getName())
                 .build();
-        Artist response = artistRepository.save(artist);
 
-        return response;
+        return artistRepository.save(artist);
     }
 
     public Artist update(Artist artist) {
         if (artistRepository.findById(artist.getId()).isEmpty()) {
             throw new RuntimeException("El artista solicitado no ha sido encontrado");
         }
-        Artist response = artistRepository.save(artist);
 
-        return response;
+        return artistRepository.save(artist);
     }
 
     public Long destroy(Long id) {

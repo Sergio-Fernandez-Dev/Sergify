@@ -24,4 +24,8 @@ public class Artist {
     @ManyToMany(mappedBy = "artists")
     @JsonIgnore
     private Set<Album> discography = new HashSet<>();
+
+    public void addAlbum(Album album) {
+        this.discography.add(album);
+    }
 }

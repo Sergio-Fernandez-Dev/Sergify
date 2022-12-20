@@ -23,6 +23,6 @@ public class Track {
     private String url;
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "album_id"                   )
+    @JoinColumn(name = "album_id", nullable = false)
     private Album album;
 }

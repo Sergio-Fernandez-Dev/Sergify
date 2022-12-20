@@ -36,6 +36,13 @@ public class AlbumController {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping("/artist/{artistName}")
+    public ResponseEntity<Optional<Album>> show(@PathVariable String artistName) {
+        Optional<Album> response = albumService.show(artistName);
+
+        return ResponseEntity.ok().body(response);
+    }
+
     @PostMapping("")
     public ResponseEntity<Album> store(@RequestBody AlbumRequest request) {
         Album response = albumService.store(request);

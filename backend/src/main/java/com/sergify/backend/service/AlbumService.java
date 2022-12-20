@@ -1,11 +1,9 @@
 package com.sergify.backend.service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.sergify.backend.model.Album;
@@ -36,48 +34,28 @@ public class AlbumService {
         return albumRepository.findById(id);
     }
 
+    public Optional<Album> show(String artistName) {
+        return albumRepository.findByArtistName(artistName);
+    }
+
     public Album store(AlbumRequest request) {
-        Set<Artist> artists = new HashSet<>();
-        Set<Track> trackList = new HashSet<>();    
-        
-        for (ArtistRequest currentArtist : request.getArtists()) {
-            Artist artist = Artist
-                    .builder()
-                    .name(currentArtist.getName())
-                    .build();
-            artists.add(artist);
-        }
         Album album = Album
                 .builder()
                 .title(request.getTitle())
                 .cover(request.getCover())
-                .artists(artists)
                 .build();
+        addArtistsToAlbum(request.getArtists(), album);
+        addTrackListToAlbum(request.getTrackList(), album);
 
-        for (TrackRequest currentTrack : request.getTrackList()) {
-            Track track = Track
-                    .builder()
-                    .title(currentTrack.getTitle())
-                    .position(currentTrack.getPosition())
-                    .url(currentTrack.getUrl())
-                    .build();                 
-            trackList.add(track);
-            album.addTrack(track);
-            album.setTrackList(trackList);
-        }
-
-        Album response = albumRepository.save(album);
-
-        return response;
+        return albumRepository.save(album);
     }
 
     public Album update(Album album) {
         if (albumRepository.findById(album.getId()).isEmpty()) {
             throw new RuntimeException("El álbum solicitado no ha sido encontrado");
         }
-        Album response = albumRepository.save(album);
 
-        return response;
+        return albumRepository.save(album);
     }
 
     public Long destroy(Long id) {
@@ -89,4 +67,46 @@ public class AlbumService {
         return id;
     }
 
+    private void addArtistsToAlbum(List<ArtistRequest> request, Album album) {
+        Set<Artist> artistList = new HashSet<>();
+
+        for (ArtistRequest currentArtist :request) {
+            Artist artist = Artist
+                    .builder()
+                    .name(currentArtist.getName())
+                    .discography(new HashSet<>())
+                    .build();
+            artistList.add(artist);
+            artist.addAlbum(album);
+        }
+        album.setArtists(artistList);
+    }
+
+    private void addTrackListToAlbum(List<TrackRequest> request, Album album) {
+        Set<Track> trackList = new HashSet<>();
+
+        for (TrackRequest currentTrack : request) {
+            Track track = Track
+                    .builder()
+                    .title(currentTrack.getTitle())
+                    .position(currentTrack.getPosition())
+                    .url(currentTrack.getUrl())
+                    .build();
+            trackList.add(track);
+            album.addTrack(track);
+        }
+        album.setTrackList(trackList);
+    }
+
+    public boolean checkIfArtistAlreadyExists(String artistName, Album album) {
+        Set<Artist> artists = album.getArtists();
+
+        for (Artist artist : artists) {
+            if (artist.getName().equals(artistName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
