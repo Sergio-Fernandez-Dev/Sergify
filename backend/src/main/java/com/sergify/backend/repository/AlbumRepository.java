@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sergify.backend.model.Album;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Repository
@@ -22,4 +23,5 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
             nativeQuery = true
     )
     Optional<Album> findByArtistName(String artistName);
+    Optional<Iterable<String>> findDiscographyByAlbumId(Long albumId);
 }
