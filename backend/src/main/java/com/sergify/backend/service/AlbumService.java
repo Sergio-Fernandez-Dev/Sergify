@@ -40,7 +40,7 @@ public class AlbumService {
     }
 
     public Optional<Album> show(String artistName) {
-        return albumRepository.findByArtistName(artistName);
+        return albumRepository.findAlbumByArtistName(artistName);
     }
 
     public Album store(AlbumRequest request) {
@@ -68,8 +68,10 @@ public class AlbumService {
         if (albumRepository.findById(id).isEmpty()) {
             throw new RuntimeException("El álbum solicitado no ha sido encontrado");
         }
-
+        Long artistId = artistRepository.findArtistIdByAlbumId(id).orElseThrow();
         albumRepository.deleteById(id);
+        this.removeArtistWithoutAlbum(artistId);
+
         return id;
     }
 
@@ -106,5 +108,11 @@ public class AlbumService {
             album.addTrack(track);
         }
         album.setTrackList(trackList);
+    }
+
+    private void removeArtistWithoutAlbum(Long artistId) {
+        if (albumRepository.findAlbumIdByArtistId(artistId).isEmpty()) {
+            artistRepository.deleteById(artistId);
+        }
     }
 }
