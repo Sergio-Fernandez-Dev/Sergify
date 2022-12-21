@@ -31,7 +31,13 @@ public class Album {
     )
     private Set<Track> trackList = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH
+            }
+    )
     @JoinTable(
             name = "album_artist",
             joinColumns = @JoinColumn(name = "album_id"),
