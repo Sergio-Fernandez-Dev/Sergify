@@ -2,6 +2,7 @@ package com.sergify.backend.service;
 
 import java.util.*;
 
+import com.sun.jdi.request.BreakpointRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,11 +57,10 @@ public class AlbumService {
         return albumRepository.save(album);
     }
 
-    public Album update(Album album) {
-        if (albumRepository.findById(album.getId()).isEmpty()) {
-            throw new RuntimeException("El álbum solicitado no ha sido encontrado");
-        }
+    public Album update(Long id, AlbumRequest request) {
+        Album album = albumRepository.findById(id).orElseThrow();
 
+        BeanUtils.copyProperties(request, album);
         return albumRepository.save(album);
     }
 
@@ -89,7 +89,6 @@ public class AlbumService {
 
             artistList.add(artist);
             artist.addAlbum(album);
-
         }
         album.setArtists(artistList);
     }

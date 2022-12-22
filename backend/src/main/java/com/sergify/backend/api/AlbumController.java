@@ -50,9 +50,9 @@ public class AlbumController {
         return ResponseEntity.ok().body(response);
     }
 
-    @PutMapping("")
-    public ResponseEntity<Album> update(@RequestBody Album album) {
-        Album response = albumService.update(album);
+    @PutMapping("/{id}")
+    public ResponseEntity<Album> update(@PathVariable Long id, @RequestBody AlbumRequest request) {
+        Album response = albumService.update(id, request);
 
         return ResponseEntity.ok().body(response);
     }
