@@ -26,8 +26,11 @@ public class Album {
 
     @OneToMany(
             mappedBy = "album",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+            }
     )
     private Set<Track> trackList = new HashSet<>();
 
@@ -35,7 +38,7 @@ public class Album {
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE,
-                    CascadeType.REFRESH
+                    CascadeType.REFRESH,
             }
     )
     @JoinTable(

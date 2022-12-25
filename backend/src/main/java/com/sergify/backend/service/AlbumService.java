@@ -61,6 +61,11 @@ public class AlbumService {
         Album album = albumRepository.findById(id).orElseThrow();
 
         BeanUtils.copyProperties(request, album);
+        album.setId(id);
+
+        addArtistsToAlbum(request.getArtists(), album);
+        addTrackListToAlbum(request.getTrackList(), album);
+
         return albumRepository.save(album);
     }
 
