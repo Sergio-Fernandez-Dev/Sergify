@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class TrackRequest {
+    private Long id;
     private String title;
     private Integer position;
     private String url;

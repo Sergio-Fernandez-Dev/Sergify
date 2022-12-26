@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class AlbumRequest {
+    private Long id;
     private String title;
     private String cover;
     private List<TrackRequest> trackList;

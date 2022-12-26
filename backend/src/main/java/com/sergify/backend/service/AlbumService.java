@@ -61,7 +61,6 @@ public class AlbumService {
         Album album = albumRepository.findById(id).orElseThrow();
 
         BeanUtils.copyProperties(request, album);
-        album.setId(id);
 
         addArtistsToAlbum(request.getArtists(), album);
         addTrackListToAlbum(request.getTrackList(), album);
@@ -104,6 +103,7 @@ public class AlbumService {
         for (TrackRequest currentTrack : request) {
             Track track = Track
                     .builder()
+                    .id(currentTrack.getId())
                     .title(currentTrack.getTitle())
                     .position(currentTrack.getPosition())
                     .url(currentTrack.getUrl())

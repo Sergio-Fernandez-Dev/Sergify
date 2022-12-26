@@ -8,5 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class ArtistRequest {
+    private Long id;
     private String name;
 }
