@@ -101,13 +101,8 @@ public class AlbumService {
         Set<Track> trackList = new HashSet<>();
 
         for (TrackRequest currentTrack : request) {
-            Track track = Track
-                    .builder()
-                    .id(currentTrack.getId())
-                    .title(currentTrack.getTitle())
-                    .position(currentTrack.getPosition())
-                    .url(currentTrack.getUrl())
-                    .build();
+            Track track = new Track();
+            BeanUtils.copyProperties(currentTrack, track);
             trackList.add(track);
             album.addTrack(track);
         }
