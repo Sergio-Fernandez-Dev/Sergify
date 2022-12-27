@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sergify.backend.model.Track;
-import com.sergify.backend.payload.request.TrackRequest;
+import com.sergify.backend.entity.Track;
+import com.sergify.backend.payload.TrackRequest;
 import com.sergify.backend.service.TrackService;
 
 @RestController

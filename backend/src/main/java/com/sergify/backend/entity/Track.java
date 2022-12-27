@@ -1,4 +1,4 @@
-package com.sergify.backend.model;
+package com.sergify.backend.entity;
 
 import lombok.*;
 import javax.persistence.*;

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.sergify.backend.model.Album;
+import com.sergify.backend.entity.Album;
 
 import java.util.Optional;
 

@@ -2,18 +2,17 @@ package com.sergify.backend.service;
 
 import java.util.*;
 
-import com.sun.jdi.request.BreakpointRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-import com.sergify.backend.model.Album;
-import com.sergify.backend.model.Artist;
-import com.sergify.backend.model.Track;
-import com.sergify.backend.payload.request.AlbumRequest;
-import com.sergify.backend.payload.request.ArtistRequest;
-import com.sergify.backend.payload.request.TrackRequest;
+import com.sergify.backend.entity.Album;
+import com.sergify.backend.entity.Artist;
+import com.sergify.backend.entity.Track;
+import com.sergify.backend.payload.AlbumRequest;
+import com.sergify.backend.payload.ArtistRequest;
+import com.sergify.backend.payload.TrackRequest;
 import com.sergify.backend.repository.AlbumRepository;
 import com.sergify.backend.repository.ArtistRepository;
 

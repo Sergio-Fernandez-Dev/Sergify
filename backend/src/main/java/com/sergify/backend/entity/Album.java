@@ -1,4 +1,4 @@
-package com.sergify.backend.model;
+package com.sergify.backend.entity;
 
 import lombok.*;
 
@@ -26,11 +26,7 @@ public class Album {
 
     @OneToMany(
             mappedBy = "album",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REFRESH,
-            }
+            cascade = {CascadeType.ALL}
     )
     private Set<Track> trackList = new HashSet<>();
 

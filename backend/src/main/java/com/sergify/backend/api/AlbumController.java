@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sergify.backend.model.Album;
-import com.sergify.backend.payload.request.AlbumRequest;
+import com.sergify.backend.entity.Album;
+import com.sergify.backend.payload.AlbumRequest;
 import com.sergify.backend.service.AlbumService;
 
 @RestController

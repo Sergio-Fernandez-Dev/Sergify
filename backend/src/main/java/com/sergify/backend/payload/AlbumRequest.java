@@ -1,4 +1,4 @@
-package com.sergify.backend.payload.request;
+package com.sergify.backend.payload;
 
 import java.util.List;
 
