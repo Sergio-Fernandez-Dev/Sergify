@@ -3,6 +3,7 @@ package com.sergify.backend.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +31,8 @@ public class ArtistService {
     }
 
     public Artist store(ArtistRequest request) {
-        Artist artist = Artist
-                .builder()
-                .name(request.getName())
-                .build();
+        Artist artist = new Artist();
+        BeanUtils.copyProperties(request, artist);
 
         return artistRepository.save(artist);
     }

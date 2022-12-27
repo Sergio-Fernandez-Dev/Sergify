@@ -3,6 +3,8 @@ package com.sergify.backend.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,24 +32,18 @@ public class TrackService {
     }
 
     public Track store(TrackRequest request) {
-        Track track = Track
-                .builder()
-                .title(request.getTitle())
-                .position(request.getPosition())
-                .url(request.getUrl())
-                .build();
-        Track response = trackRepository.save(track);
+        Track track = new Track();
+        BeanUtils.copyProperties(request, track);
 
-        return response;
+        return trackRepository.save(track);
     }
 
     public Track update(Track track) {
         if (trackRepository.findById(track.getId()).isEmpty()) {
             throw new RuntimeException("El álbum solicitado no ha sido encontrado");
         }
-        Track response = trackRepository.save(track);
 
-        return response;
+        return trackRepository.save(track);
     }
 
     public Long destroy(Long id) {
