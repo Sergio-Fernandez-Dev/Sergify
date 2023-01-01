@@ -69,7 +69,7 @@ public class AlbumService {
 
     public Long destroy(Long id) {
         if (albumRepository.findById(id).isEmpty()) {
-            throw new RuntimeException("El álbum solicitado no ha sido encontrado");
+            throw new NoSuchElementException("El álbum solicitado no ha sido encontrado");
         }
         Long artistId = artistRepository.findArtistIdByAlbumId(id).orElseThrow();
         albumRepository.deleteById(id);
