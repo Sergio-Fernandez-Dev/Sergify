@@ -4,7 +4,7 @@ import { ref } from "vue";
 export const usePlaylistStore = defineStore("playlist", () => {
   const playlist = ref({});
   const currentTrack = ref({});
-
+  const songIsPaused = ref(false);
   let audio = new Audio();
 
   function addAlbumToPlaylist(album) {
@@ -34,10 +34,12 @@ export const usePlaylistStore = defineStore("playlist", () => {
 
   function startSong() {
     this.audio.play();
+    this.songIsPaused = false;
   }
 
   function pauseSong() {
     this.audio.pause();
+    this.songIsPaused = true;
   }
 
   function nextSong() {
@@ -66,6 +68,7 @@ export const usePlaylistStore = defineStore("playlist", () => {
     audio,
     playlist,
     currentTrack,
+    songIsPaused,
     addAlbumToPlaylist,
     loadTrack,
     startSong,

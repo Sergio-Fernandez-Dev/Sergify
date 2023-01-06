@@ -41,6 +41,7 @@ defineProps({
   &__img {
     width: 100%;
     height: auto;
+    border: 1px solid map-get($map: $color, $key: "border-light");
   }
 
   &__icon {
@@ -53,11 +54,11 @@ defineProps({
     opacity: 0%;
 
     &:hover {
-      opacity: 30%;
+      opacity: 50%;
     }
 
     &:active {
-      opacity: 50%;
+      opacity: 75%;
     }
   }
 
@@ -66,9 +67,12 @@ defineProps({
       $family: $primary-font-family,
       $size: map-get($map: $font-size, $key: "mv-sm")
     );
+    text-shadow: 0 0.4rem 0.2rem map-get($map: $color, $key: "shadow-dark");
+    margin-bottom: calc(map-get($map: $font-size, $key: "mv-sm") * 0.2);
 
     @include screen($screen-md) {
-      font-size: map-get($font-size, "mv-lg");
+      font-size: map-get($font-size, "md");
+      margin-bottom: calc(map-get($map: $font-size, $key: "md") * 0.2);
     }
   }
 
@@ -79,9 +83,10 @@ defineProps({
       $style: italic,
       $weight: 300
     );
+    text-shadow: 0 0.4rem 0.2rem map-get($map: $color, $key: "shadow-dark");
 
     @include screen($screen-md) {
-      font-size: map-get($font-size, "mv-md");
+      font-size: map-get($font-size, "sm");
     }
   }
 

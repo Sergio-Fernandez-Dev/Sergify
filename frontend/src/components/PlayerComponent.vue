@@ -16,7 +16,6 @@ const store = usePlaylistStore();
 const backgroundImg = ref();
 const timeBarWidth = ref(0);
 const circleLeft = ref(0);
-
 let audio = null;
 let duration = null;
 let currentTime = null;
@@ -107,8 +106,16 @@ function updateTimeBar(currentPosition) {
     <div class="media">
       <div class="media__icons">
         <BackwardIcon class="media__icon" @click="store.previousSong()" />
-        <PlayTrackIcon class="media__icon" @click="store.startSong()" />
-        <PauseIcon class="media__icon" @click="store.pauseSong()" />
+        <PlayTrackIcon
+          class="media__icon"
+          @click="store.startSong()"
+          v-if="store.songIsPaused"
+        />
+        <PauseIcon
+          class="media__icon"
+          @click="store.pauseSong()"
+          v-if="!store.songIsPaused"
+        />
         <ForwardIcon class="media__icon" @click="store.nextSong()" />
       </div>
       <div class="media__wrapper">
@@ -191,6 +198,7 @@ function updateTimeBar(currentPosition) {
         $family: $primary-font-family,
         $size: map-get($map: $font-size, $key: "mv-lg")
       );
+      text-shadow: 0 0.4rem 0.2rem map-get($map: $color, $key: "shadow-dark");
     }
     &__subtitle {
       @include font(
@@ -199,6 +207,7 @@ function updateTimeBar(currentPosition) {
         $style: italic,
         $weight: 300
       );
+      text-shadow: 0 0.4rem 0.2rem map-get($map: $color, $key: "shadow-dark");
     }
   }
   .media {
