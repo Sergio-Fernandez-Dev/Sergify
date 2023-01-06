@@ -1,10 +1,10 @@
 import axios from "axios";
+let uri = "http://localhost:8080/api/v1/";
 
-async function getAlbumColletion() {
+async function getAlbumCollection() {
   const options = {
     method: "GET",
-    url: "http://localhost:3000/albums",
-    params: { _expand: "artist" },
+    url: uri + "album",
   };
   const result = await apiCall(options);
 
@@ -14,12 +14,9 @@ async function getAlbumColletion() {
 async function getAllTracks(albumId) {
   const options = {
     method: "GET",
-    url: `http://localhost:3000/albums/${albumId}`,
-    params: {
-      _expand: "artist",
-      _embed: "tracks",
-    },
+    url: uri + `album/${albumId}`,
   };
+
   const result = await apiCall(options);
 
   return result;
@@ -35,4 +32,4 @@ async function apiCall(options) {
   }
 }
 
-export { getAlbumColletion, getAllTracks };
+export { getAlbumCollection, getAllTracks };

@@ -11,6 +11,7 @@ import com.sergify.backend.entity.Album;
 import com.sergify.backend.payload.AlbumRequest;
 import com.sergify.backend.service.AlbumService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1/album")
 public class AlbumController {

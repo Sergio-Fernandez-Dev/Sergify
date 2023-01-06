@@ -8,21 +8,21 @@ export const usePlaylistStore = defineStore("playlist", () => {
   let audio = new Audio();
 
   function addAlbumToPlaylist(album) {
-    const tracklist = [];
-    album.tracks.forEach((track) => {
-      tracklist.push({
+    let trackList = [];
+    album.trackList.forEach((track) => {
+      trackList[track.position - 1] = {
         position: track.position,
         title: track.title,
         url: track.url,
-      });
+      };
     });
     this.playlist = {
-      artist: album.artist.name,
+      artist: album.artists[0].name,
       cover: album.cover,
-      tracks: tracklist,
+      tracks: trackList,
     };
 
-    this.loadTrack(tracklist[0]);
+    this.loadTrack(trackList[0]);
   }
 
   function loadTrack(track) {

@@ -11,6 +11,8 @@ import com.sergify.backend.entity.Track;
 import com.sergify.backend.payload.TrackRequest;
 import com.sergify.backend.service.TrackService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/api/v1/track")
 

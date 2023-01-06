@@ -5,22 +5,22 @@
       :key="album.id"
       :id="album.id"
       :title="album.title"
-      :artist="album.artist.name"
+      :artists="album.artists"
       :cover="album.cover"
     />
   </main>
 </template>
 
 <script setup>
-import { getAlbumColletion } from "@/services/apiCall";
+import { getAlbumCollection } from "@/services/apiCall";
 import AlbumComponent from "@/components/AlbumComponent.vue";
 import { onMounted, ref } from "vue";
 
 const data = ref(null);
 
 onMounted(async () => {
-  data.value = await getAlbumColletion();
-  console.log(data.value[0]);
+  data.value = await getAlbumCollection();
+  console.log(data.value);
 });
 </script>
 

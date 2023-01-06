@@ -11,6 +11,8 @@ import com.sergify.backend.entity.Artist;
 import com.sergify.backend.payload.ArtistRequest;
 import com.sergify.backend.service.ArtistService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/api/v1/artist")
 public class ArtistController {

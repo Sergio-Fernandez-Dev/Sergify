@@ -73,7 +73,7 @@ function moveTimeBar(e) {
 
 function updateTimeBar(currentPosition) {
   let progress = ref();
-  let maxduration = this.audio.duration;
+  let maxDuration = this.audio.duration;
   let position = currentPosition - progress.value.offsetLeft;
   let percentage = (100 * position) / progress.value.offsetWidth;
   if (percentage > 100) {
@@ -84,7 +84,7 @@ function updateTimeBar(currentPosition) {
   }
   timeBarWidth.value = percentage + "%";
   circleLeft.value = percentage + "%";
-  audio.currentTime = (maxduration * percentage) / 100;
+  audio.currentTime = (maxDuration * percentage) / 100;
   audio.play();
 }
 </script>
@@ -112,7 +112,7 @@ function updateTimeBar(currentPosition) {
         <ForwardIcon class="media__icon" @click="store.nextSong()" />
       </div>
       <div class="media__wrapper">
-        <p class="media__time_info">
+        <p class="media__time-info">
           <span id="current-time"></span> {{ currentTime }} /
           <span id="track-duration"> {{ duration }}</span>
         </p>
@@ -219,7 +219,7 @@ function updateTimeBar(currentPosition) {
       width: 90vw;
       @include flex(row, $justify: space-between);
     }
-    &__time_info {
+    &__time-info {
       @include font(
         $family: $primary-font-family,
         $size: map-get($map: $font-size, $key: "mv-xs")
