@@ -99,7 +99,7 @@ function updateTimeBar(currentPosition) {
       <div class="display__icons">
         <MoreOptionsIcon class="display__icon" />
         <RouterLink to="/">
-          <HomeIcon class="display__icon" />
+          <HomeIcon class="display__icon" @click="store.pauseSong()" />
         </RouterLink>
       </div>
     </div>
