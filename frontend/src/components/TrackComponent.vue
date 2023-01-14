@@ -1,14 +1,23 @@
 <script setup>
 import { usePlaylistStore } from "../stores/playlistStore";
+import MusicalNoteIcon from "./icons/MusicalNoteIcon.vue";
 import PlayTrackIcon from "./icons/PlayTrackIcon.vue";
 
 defineProps({ track: Object });
 const store = usePlaylistStore();
+const checkActiveTrack = (track) => {
+  return store.currentTrack.id === track.id;
+};
 </script>
 
 <template>
-  <li class="track">
-    <PlayTrackIcon class="track__icon" @click="store.loadTrack(track)" />
+  <li class="track" :class="{ 'track--active': checkActiveTrack(track) }">
+    <PlayTrackIcon
+      class="track__icon"
+      @click="store.loadTrack(track)"
+      v-if="!checkActiveTrack(track)"
+    />
+    <MusicalNoteIcon class="track__icon" v-else />
     <p class="track__p">
       <span>{{ track.position }}. </span>
       <span>{{ track.title }}. </span>
@@ -23,10 +32,15 @@ const store = usePlaylistStore();
   padding: 1rem 5%;
   @include flex(row, $justify: flex-start);
 
+  &--active {
+    background-color: map-get($map: $color, $key: "contrast");
+  }
+
   &__icon {
     width: 2rem;
     margin-right: 2rem;
   }
+
   &__p {
     color: map-get($map: $color, $key: "text-dark");
     @include font(

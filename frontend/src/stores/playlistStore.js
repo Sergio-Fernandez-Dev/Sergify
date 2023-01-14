@@ -11,6 +11,7 @@ export const usePlaylistStore = defineStore("playlist", () => {
     let trackList = [];
     album.trackList.forEach((track) => {
       trackList[track.position - 1] = {
+        id: track.id,
         position: track.position,
         title: track.title,
         url: track.url,
