@@ -29,8 +29,9 @@ onMounted(async () => {
     updateTime();
   };
 
-  audio.onloadedmetadata = () => {
+  audio.onloadedmetadata = (e) => {
     updateTime();
+    moveTimeBar(e);
   };
 
   audio.onended = () => {
@@ -71,8 +72,8 @@ function moveTimeBar(e) {
 }
 
 function updateTimeBar(currentPosition) {
-  let progress = ref();
-  let maxDuration = this.audio.duration;
+  let progress = ref(1);
+  let maxDuration = audio.duration;
   let position = currentPosition - progress.value.offsetLeft;
   let percentage = (100 * position) / progress.value.offsetWidth;
   if (percentage > 100) {
@@ -107,12 +108,12 @@ function updateTimeBar(currentPosition) {
       <div class="media__icons">
         <BackwardIcon class="media__icon" @click="store.previousSong()" />
         <PlayTrackIcon
-          class="media__icon"
+          class="media__icon media__icon--main"
           @click="store.startSong()"
           v-if="store.songIsPaused"
         />
         <PauseIcon
-          class="media__icon"
+          class="media__icon media__icon--main"
           @click="store.pauseSong()"
           v-if="!store.songIsPaused"
         />
@@ -218,10 +219,17 @@ function updateTimeBar(currentPosition) {
     z-index: 1;
     @include flex(column, $justify: space-evenly);
     &__icon {
-      width: 3rem;
+      height: 3rem;
       fill: map-get($color, "icon-light");
       @include screen($screen-md) {
-        width: 5rem;
+        height: 5rem;
+      }
+
+      &--main {
+        height: 6rem;
+        @include screen($screen-md) {
+          height: 10rem;
+        }
       }
     }
     &__icons {
