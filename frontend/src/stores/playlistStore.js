@@ -10,12 +10,12 @@ export const usePlaylistStore = defineStore("playlist", () => {
   function addAlbumToPlaylist(album) {
     let trackList = [];
     album.trackList.forEach((track) => {
-      trackList[track.position - 1] = {
+      trackList.push({
         id: track.id,
         position: track.position,
         title: track.title,
         url: track.url,
-      };
+      });
     });
     this.playlist = {
       artist: album.artists[0].name,
