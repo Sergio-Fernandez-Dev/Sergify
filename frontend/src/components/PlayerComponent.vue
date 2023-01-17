@@ -16,7 +16,7 @@ const store = usePlaylistStore();
 const backgroundImg = ref();
 const timeBarWidth = ref(0);
 let audio = null;
-let duration = null;
+let duration = 0;
 let currentTime = null;
 
 onMounted(async () => {

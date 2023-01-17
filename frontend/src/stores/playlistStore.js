@@ -45,8 +45,9 @@ export const usePlaylistStore = defineStore("playlist", () => {
 
   function nextSong() {
     const playlist = this.playlist;
-    let nextSong = this.currentTrack.position;
-
+    const currentSong = playlist.tracks.indexOf(this.currentTrack);
+    let nextSong = currentSong + 1;
+    console.log(currentSong);
     if (nextSong > playlist.tracks.length - 1) {
       nextSong = 0;
     }
@@ -56,10 +57,12 @@ export const usePlaylistStore = defineStore("playlist", () => {
 
   function previousSong() {
     const playlist = this.playlist;
-    let previousSong = this.currentTrack.position - 2;
+    const currentSong = playlist.tracks.indexOf(this.currentTrack);
+    const lastSong = playlist.tracks.length - 1;
+    let previousSong = currentSong - 1;
 
     if (previousSong < 0) {
-      previousSong = playlist.tracks.length - 1;
+      previousSong = lastSong;
     }
 
     this.loadTrack(playlist.tracks[previousSong]);
