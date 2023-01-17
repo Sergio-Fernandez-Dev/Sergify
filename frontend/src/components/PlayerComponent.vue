@@ -15,7 +15,6 @@ const albumId = useRoute().params.albumId;
 const store = usePlaylistStore();
 const backgroundImg = ref();
 const timeBarWidth = ref(0);
-const circleLeft = ref(0);
 let audio = null;
 let duration = null;
 let currentTime = null;
@@ -27,11 +26,11 @@ onMounted(async () => {
   audio = store.audio;
   audio.ontimeupdate = () => {
     updateTime();
+    updateTimeBar();
   };
 
-  audio.onloadedmetadata = (e) => {
+  audio.onloadedmetadata = () => {
     updateTime();
-    moveTimeBar(e);
   };
 
   audio.onended = () => {
@@ -40,8 +39,8 @@ onMounted(async () => {
 });
 
 function updateTime() {
-  const trackDuration = document.getElementById("track-duration");
-  const time = document.getElementById("current-time");
+  const trackDuration = document.querySelector("#track-duration");
+  const time = document.querySelector("#current-time");
 
   let durationInMinutes = Math.floor(audio.duration / 60);
   let durationInSeconds = Math.floor(audio.duration - durationInMinutes * 60);
@@ -72,19 +71,17 @@ function moveTimeBar(e) {
 }
 
 function updateTimeBar(currentPosition) {
-  let progress = ref(1);
-  let maxDuration = audio.duration;
-  let position = currentPosition - progress.value.offsetLeft;
-  let percentage = (100 * position) / progress.value.offsetWidth;
-  if (percentage > 100) {
-    percentage = 100;
+  if (isNaN(currentPosition)) {
+    return (timeBarWidth.value =
+      (100 / audio.duration) * audio.currentTime + "%");
   }
-  if (percentage < 0) {
-    percentage = 0;
-  }
+  const timeBar = document.querySelector("#timebar");
+  const position = currentPosition - timeBar.offsetLeft;
+  let percentage = (100 * position) / timeBar.offsetWidth;
+  if (percentage < 0) percentage = 0;
+  if (percentage > 100) percentage = 100;
   timeBarWidth.value = percentage + "%";
-  circleLeft.value = percentage + "%";
-  audio.currentTime = (maxDuration * percentage) / 100;
+  audio.currentTime = (audio.duration * percentage) / 100;
   audio.play();
 }
 </script>
@@ -124,7 +121,7 @@ function updateTimeBar(currentPosition) {
           <span id="current-time"></span> {{ currentTime }} /
           <span id="track-duration"> {{ duration }}</span>
         </p>
-        <div class="media__timebar" @click="moveTimeBar(e)">
+        <div id="timebar" class="media__timebar" @click="moveTimeBar">
           <div
             class="media__timebar--progress"
             :style="{ width: timeBarWidth }"
