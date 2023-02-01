@@ -1,5 +1,5 @@
 import axios from "axios";
-let uri = "http://localhost:8080/api/v1/";
+let uri = "http://localhost:8000/api/v1/";
 
 async function getAlbumCollection() {
   const options = {

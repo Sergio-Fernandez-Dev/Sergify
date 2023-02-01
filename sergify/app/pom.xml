@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.sergify</groupId>
 	<artifactId>backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>backend</name>
-	<description>Demo project for Spring Boot</description>
+	<description>API Rest to have access to your</description>
 	<properties>
 		<java.version>18</java.version>
 	</properties>

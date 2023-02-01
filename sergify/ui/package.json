@@ -11,6 +11,7 @@
     "json-server": "json-server --server --watch ./mock/db.json"
   },
   "dependencies": {
+    "axios": "1.2.4",
     "pinia": "^2.0.16",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"

@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  app:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
+    restart: always
+    env_file: .env
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}?useSSL=false"
+      SPRING_DATASOURCE_USERNAME": "${MYSQLDB_USER}"
+      SPRING_DATASOURCE_PASSWORD": "${MYSQLDB_ROOT_PASSWORD}"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT": "org.hibernate.dialect.MySQL5InnoDBDialect"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+    ports:
+      - ${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}
+    networks:
+      - backend
+    depends_on:
+      - mysqldb
+  
+  ui:
+    build: 
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - ${UI_LOCAL_PORT}:${UI_DOCKER_PORT}
+
+    depends_on:
+      - app
+  
+  mysqldb:
+    image: mysql:5.7
+    restart: always
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQLDB_DATABASE}
+    ports:
+      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - backend
+      - admin
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - ${ADMINER_LOCAL_PORT}:${ADMINER_DOCKER_PORT}     
+    networks:
+      - admin
+    depends_on:
+      - mysqldb
+
+volumes:
+  data:
+
+networks:
+  backend:
+  admin:
