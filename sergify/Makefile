@@ -11,3 +11,7 @@ stop:
 .PHONY: build
 build:
 	@docker compose build
+
+.PHONY: refresh
+refresh: build run
+	
