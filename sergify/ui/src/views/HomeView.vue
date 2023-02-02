@@ -1,5 +1,20 @@
+<script setup>
+import { getAlbumCollection } from "@/services/apiCall";
+import AlbumComponent from "@/components/AlbumComponent.vue";
+import AddAlbumComponent from "@/components/AddAlbumComponent.vue";
+import { onMounted, ref } from "vue";
+
+const data = ref(null);
+
+onMounted(async () => {
+  data.value = await getAlbumCollection();
+  console.log(data.value);
+});
+</script>
+
 <template>
   <main class="main main--home-view">
+    <AddAlbumComponent />
     <AlbumComponent
       v-for="album in data"
       :key="album.id"
@@ -10,19 +25,6 @@
     />
   </main>
 </template>
-
-<script setup>
-import { getAlbumCollection } from "@/services/apiCall";
-import AlbumComponent from "@/components/AlbumComponent.vue";
-import { onMounted, ref } from "vue";
-
-const data = ref(null);
-
-onMounted(async () => {
-  data.value = await getAlbumCollection();
-  console.log(data.value);
-});
-</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/layout/main";

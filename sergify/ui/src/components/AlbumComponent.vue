@@ -1,3 +1,15 @@
+<script setup>
+import PlayAlbumIcon from "@/components/icons/PlayAlbumIcon.vue";
+import { RouterLink } from "vue-router";
+
+defineProps({
+  id: Number,
+  title: String,
+  artists: Array,
+  cover: String,
+});
+</script>
+
 <template>
   <div class="album">
     <RouterLink
@@ -15,18 +27,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import PlayAlbumIcon from "@/components/icons/PlayAlbumIcon.vue";
-import { RouterLink } from "vue-router";
-
-defineProps({
-  id: Number,
-  title: String,
-  artists: Array,
-  cover: String,
-});
-</script>
 
 <style lang="scss" scoped>
 .album {
