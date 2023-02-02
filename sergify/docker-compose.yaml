@@ -25,7 +25,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - ${UI_LOCAL_PORT}:${UI_DOCKER_PORT}
-
+    volumes:
+      - ./ui/src:/app/src
     depends_on:
       - app
   
@@ -56,6 +57,7 @@ services:
 
 volumes:
   data:
+  ui:
 
 networks:
   backend:
