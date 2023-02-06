@@ -19,7 +19,6 @@ import com.sergify.backend.service.TrackService;
 public class TrackController {
     private final TrackService trackService;
 
-    @Autowired
     public TrackController(TrackService trackService) {
         this.trackService = trackService;
     }

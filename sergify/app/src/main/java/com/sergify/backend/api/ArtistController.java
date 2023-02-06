@@ -19,7 +19,6 @@ public class ArtistController {
 
     private final ArtistService artistService;
 
-    @Autowired
     public ArtistController(ArtistService artistService) {
         this.artistService = artistService;
     }
