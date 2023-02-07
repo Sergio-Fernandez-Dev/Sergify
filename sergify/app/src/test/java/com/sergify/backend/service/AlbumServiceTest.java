@@ -1,9 +1,9 @@
 package com.sergify.backend.service;
 
 import com.sergify.backend.entity.Album;
-import com.sergify.backend.payload.AlbumRequest;
-import com.sergify.backend.payload.ArtistRequest;
-import com.sergify.backend.payload.TrackRequest;
+import com.sergify.backend.payload.request.AlbumRequest;
+import com.sergify.backend.payload.request.ArtistRequest;
+import com.sergify.backend.payload.request.TrackRequest;
 import com.sergify.backend.repository.AlbumRepository;
 import com.sergify.backend.repository.ArtistRepository;
 import org.junit.jupiter.api.BeforeEach;

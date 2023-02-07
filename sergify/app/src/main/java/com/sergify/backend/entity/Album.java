@@ -25,6 +25,7 @@ public class Album {
 
         @OneToMany(mappedBy = "album", cascade = { CascadeType.ALL })
         @OrderBy("position ASC")
+        @Builder.Default
         private Set<Track> trackList = new HashSet<>();
 
         @ManyToMany(cascade = {
@@ -32,7 +33,12 @@ public class Album {
                         CascadeType.MERGE,
                         CascadeType.REFRESH,
         })
-        @JoinTable(name = "album_artist", joinColumns = @JoinColumn(name = "album_id"), inverseJoinColumns = @JoinColumn(name = "artist_id"))
+        @JoinTable(
+                name = "album_artist", 
+                joinColumns = @JoinColumn(name = "album_id"), 
+                inverseJoinColumns = @JoinColumn(name = "artist_id")
+        )
+        @Builder.Default
         private Set<Artist> artists = new HashSet<>();
 
         public void addTrack(Track track) {

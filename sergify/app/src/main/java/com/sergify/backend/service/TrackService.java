@@ -4,18 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sergify.backend.entity.Track;
-import com.sergify.backend.payload.TrackRequest;
+import com.sergify.backend.payload.request.TrackRequest;
 import com.sergify.backend.repository.TrackRepository;
 
 @Service
 public class TrackService {
     private final TrackRepository trackRepository;
 
-    @Autowired
     public TrackService(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }

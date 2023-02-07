@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sergify.backend.entity.Artist;
-import com.sergify.backend.payload.ArtistRequest;
+import com.sergify.backend.payload.request.ArtistRequest;
 import com.sergify.backend.repository.ArtistRepository;
 
 @Service
@@ -16,7 +15,6 @@ public class ArtistService {
 
     private final ArtistRepository artistRepository;
 
-    @Autowired
     public ArtistService(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
     }

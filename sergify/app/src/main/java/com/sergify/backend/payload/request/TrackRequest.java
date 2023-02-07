@@ -1,4 +1,4 @@
-package com.sergify.backend.payload;
+package com.sergify.backend.payload.request;
 
 import lombok.*;
 

@@ -23,6 +23,7 @@ public class Artist {
     private String name;
     @ManyToMany(mappedBy = "artists")
     @JsonIgnore
+    @Builder.Default
     private Set<Album> discography = new HashSet<>();
 
     public void addAlbum(Album album) {

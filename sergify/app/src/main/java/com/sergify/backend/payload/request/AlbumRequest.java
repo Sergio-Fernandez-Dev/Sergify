@@ -1,7 +1,6 @@
-package com.sergify.backend.payload;
+package com.sergify.backend.payload.request;
 
 import java.util.List;
-
 import lombok.*;
 
 @Getter

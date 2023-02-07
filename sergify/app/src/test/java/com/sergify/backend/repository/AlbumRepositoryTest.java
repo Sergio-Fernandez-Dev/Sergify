@@ -121,7 +121,7 @@ class AlbumRepositoryTest {
         album.setArtists(artists);
 
         //When
-        Album currentAlbum = underTestSubject.save(album);
+        underTestSubject.save(album);
         Optional<Long> expected = underTestSubject.findAlbumIdByArtistId(300L);
 
         //Then
