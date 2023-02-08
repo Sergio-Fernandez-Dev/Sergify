@@ -16,10 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sergify.backend.payload.response.FileResponse;
 
 @Service
-public class FileService {
+public class FileManagerService {
 
     public Set<FileResponse> getMetadata(MultipartFile[] multipartFiles) throws IOException, UnsupportedTagException, InvalidDataException {
         Set<FileResponse> response = new HashSet<>();
+
         for (MultipartFile file : multipartFiles) {
                 File tempFile = File.createTempFile("temp", ".mp3");
                 file.transferTo(tempFile);
