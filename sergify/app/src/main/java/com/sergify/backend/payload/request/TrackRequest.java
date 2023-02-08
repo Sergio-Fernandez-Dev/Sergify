@@ -1,5 +1,7 @@
 package com.sergify.backend.payload.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.*;
 
 @Getter
@@ -11,6 +13,6 @@ public class TrackRequest {
     private Long id;
     private String title;
     private Integer position;
-    private String url;
     private AlbumRequest album;
+    private MultipartFile track;
 }
